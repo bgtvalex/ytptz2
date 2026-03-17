@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- CSRF Token -->
+  <meta name="csrf-token" content="{{ csrf_token() }}">
+
+  <title>YTPTZ :: @yield('page-title')</title>
+
+  @include('inc.headlinks')
+
+</head>
+
+<body>
+
+  <!-- header -->
+  @include('inc.header')
+
+
+  <div class="container-fluid">
+    <div class="row">
+    @if(Auth::check())
+      <!-- aside -->
+      @include('inc.aside')
+      
+    @endif
+
+    @if(Auth::check())
+      <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+        @else
+        <main class="col-12 ms-sm-auto px-md-4">
+        @endif
+        <div
+          class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2">@yield('page-title')</h1>
+        </div>
+
+
+        @include('inc.messages')
+
+        @yield('content')
+
+      </main>
+
+
+    </div>
+  </div>
+  <!-- footer -->
+  @include('inc.footer')
+
+  <livewire:scripts />
+</body>
+</html>

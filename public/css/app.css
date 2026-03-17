@@ -1,0 +1,11 @@
+@media screen and (max-width: 992px) {
+    .my-overfl-y {
+        overflow-y: scroll;
+    }
+    .my-table-min-width {
+        min-width: 900px;
+    }
+    td {
+        background-color: black;
+    }
+}
