@@ -40,6 +40,10 @@ Route::get('/changelog', function () {
     return view('changelog');
 })->name('changelog')->middleware('auth');
 
+Route::get('/versions', function () {
+    return view('versions');
+})->name('versions')->middleware('auth');
+
 
 // PERSONS ============================================
 

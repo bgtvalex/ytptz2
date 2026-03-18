@@ -243,5 +243,8 @@
     <li>Перенос на домен/поддомен msptz.ru и SSL-сертификат <span class="badge rounded-pill text-bg-secondary">В очереди</span></li>
     <li>Обеспечение отказоустойчивости (перезагрузка по сторожевым таймерам) и резервное копирование на NAS <span class="badge rounded-pill text-bg-secondary">В очереди</span></li>
 </ul>
+<br/>
+<br/>
+<br/>
 
 @endsection

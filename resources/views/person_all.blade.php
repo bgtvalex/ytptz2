@@ -9,7 +9,7 @@
 @section('content')
 
 <!-- mTODO: https://codepen.io/massimo-cassandro/pen/NqRmMe -->
-<table class="table table-striped table-hover mt-4 table-responsive my-overfl-y my-table-min-width">
+<table class="table table-striped table-hover mt-4 mb-6 table-responsive">
   <tbody class="table-striped">
     <tr>
       <th scope="col">#</th>

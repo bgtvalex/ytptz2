@@ -16,3 +16,23 @@
     padding-top: 20px;
     z-index: 1020;
 }
+
+main {
+    padding-top: 50px;
+}
+
+.table {
+    margin-bottom: 100px !important;
+}
+.logo,
+.ver,
+.footer a {
+    color: var(--bs-link-color);
+}
+.footer a:hover {
+    color: yellow;
+}
+
+.ver {
+    font-size: 12px !important;
+}
