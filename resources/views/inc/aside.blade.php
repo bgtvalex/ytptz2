@@ -1,5 +1,5 @@
 @section('aside')
-<nav id="sidebarMenu" class="col-md col-lg-2 d-lg-block bg-light sidebar collapse border-end mt-4 bg-secondary bg-gradient">
+<nav id="sidebarMenu" class="my-navigation col-md col-lg-2 d-lg-block bg-light sidebar collapse border-end mt-4 bg-secondary bg-gradient">
   <div class="position-sticky">
   
   <ul class="nav flex-column">

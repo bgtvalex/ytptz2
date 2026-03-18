@@ -1,11 +1,18 @@
 @media screen and (max-width: 992px) {
     .my-overfl-y {
-        overflow-y: scroll;
     }
-    .my-table-min-width {
-        min-width: 900px;
+    .table {
+        min-width: 900px !important;
+        overflow-y: auto;
     }
-    td {
-        background-color: black;
-    }
+}
+.navbar {
+    position: fixed !important;
+    width: 100%;
+}
+.my-navigation {
+    position: fixed;
+    top: 27px;
+    padding-top: 20px;
+    z-index: 1020;
 }
