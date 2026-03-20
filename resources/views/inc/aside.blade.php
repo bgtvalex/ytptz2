@@ -69,7 +69,7 @@
         <a class="nav-link" href="{{ route('changelog') }}"><i class="bi bi-code-square"></i> Дневник разработки
         </a>
       </li><li class="nav-item">
-        <a class="nav-link" href="{{ route('versions') }}"><i class="bi bi-code-square"></i> Версионирование
+        <a class="nav-link" href="{{ route('versions') }}"><i class="bi bi-git"></i></i> Версионирование
         </a>
       </li>
     </ul>
