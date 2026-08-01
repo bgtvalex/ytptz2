@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Version extends Model
 {
     use HasFactory;
-
+    // use SoftDeletes;
+     
     protected $table = 'versions';
+    protected $guarded = [];
 }

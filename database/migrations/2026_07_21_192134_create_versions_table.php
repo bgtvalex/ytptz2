@@ -20,6 +20,8 @@ return new class extends Migration
             $table->text('desc');
             $table->string('status'); // в процессе / сделано / отменено / отложено 
             $table->timestamps();
+
+            $table->softDeletes();
         });
     }
 

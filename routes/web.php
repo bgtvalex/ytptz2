@@ -106,7 +106,18 @@ Route::get('/versions', function () {
 })->name('versions')->middleware('auth');
 
 Route::get('/version', 
-    [App\Http\Controllers\VersionController::class, 'version'])->name('version')->middleware('auth');
+    [App\Http\Controllers\VersionController::class, 'version_all'])->name('version')->middleware('auth');
+
+Route::get('/version_add', 
+    [App\Http\Controllers\VersionController::class, 'version_add'])->name('version_add')->middleware('auth');
+
+Route::get('/version_edit', 
+    [App\Http\Controllers\VersionController::class, 'version_edit'])->name('version_edit')->middleware('auth');
+
+Route::get('/version_del', 
+    [App\Http\Controllers\VersionController::class, 'version_del'])->name('version_del')->middleware('auth');
+
+
 
 
 // TEST ============================================
