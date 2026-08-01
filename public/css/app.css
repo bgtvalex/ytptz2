@@ -24,15 +24,18 @@ main {
 .table {
     margin-bottom: 100px !important;
 }
+.footer {
+    justify-content: end;
+}
 .logo,
 .ver,
 .footer a {
     color: var(--bs-link-color);
-}
-.footer a:hover {
-    color: yellow;
+    text-decoration: none;
 }
 
 .ver {
     font-size: 12px !important;
+    display: flex;
+    justify-content: end;
 }

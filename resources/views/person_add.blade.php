@@ -2,7 +2,7 @@
 
 
 @section('page-title')
-Сведения об аудитории
+Добавить персону
 @endsection
 
 

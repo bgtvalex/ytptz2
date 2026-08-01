@@ -20,6 +20,10 @@ use App\Models\Tip_vstrechi;
     return view('welcome');
 })->name('welcome');*/
 
+
+
+// AUTH PAGE ============================================
+
 Route::get('/', function () {
     if (Auth::check()) {
         return redirect('/person/all');
@@ -39,10 +43,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/changelog', function () {
     return view('changelog');
 })->name('changelog')->middleware('auth');
-
-Route::get('/versions', function () {
-    return view('versions');
-})->name('versions')->middleware('auth');
 
 
 // PERSONS ============================================
@@ -69,7 +69,7 @@ Route::get('/person/all',
     [App\Http\Controllers\PersonController::class, 'person_all'])->name('person_all')->middleware('auth');
 
 
-// VSTRECHAS ============================================
+// VSTRECHA ============================================
 
 Route::get('/vstrecha_add',
     [App\Http\Controllers\VstrechaController::class, 'vstrecha_add_page'])->name('vstrecha_add')->middleware('auth');
@@ -97,3 +97,21 @@ Route::get('/leaders_add', function () {
 Route::get('/leaders_edit', function () {
     return view('leaders_edit');
 })->name('leaders_edit')->middleware('auth');
+
+
+// VERSIONS ============================================
+
+Route::get('/versions', function () {
+    return view('versions');
+})->name('versions')->middleware('auth');
+
+Route::get('/version', 
+    [App\Http\Controllers\VersionController::class, 'version'])->name('version')->middleware('auth');
+
+
+// TEST ============================================
+
+// Route::get('/test', 'MyTestController@showPage');
+
+// Route::get('/test', 'TestController@testPage')->name('tests')->middleware('auth');
+Route::get('/test', [App\Http\Controllers\TestController::class, 'testPage'])->name('tests')->middleware('auth');

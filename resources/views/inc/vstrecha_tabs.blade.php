@@ -5,4 +5,11 @@
   <li>
     <a class="nav-link {{ Route::currentRouteName()=='vstrecha_all' ? 'active' : null }}" href="{{ route('vstrecha_all') }}">Все встречи</a>
   </li>
+  <!-- todo -->
+  <li>
+    <a class="nav-link {{ Route::currentRouteName()=='vstrecha_all' ? 'active' : null }}" href="{{ route('vstrecha_all') }}">Таблица посещений</a>
+  </li>
+  <li>
+    <a class="nav-link {{ Route::currentRouteName()=='vstrecha_all' ? 'active' : null }}" href="{{ route('vstrecha_all') }}">Виды встреч</a>
+  </li>
 </ul>
