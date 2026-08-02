@@ -117,6 +117,13 @@ Route::get('/version_edit',
 Route::get('/version_del', 
     [App\Http\Controllers\VersionController::class, 'version_del'])->name('version_del')->middleware('auth');
 
+Route::get('/version_first_or_create', 
+    [App\Http\Controllers\VersionController::class, 'firstOrCreate'])->name('firstOrCreate')->middleware('auth');
+
+Route::get('/version_update_or_create', 
+    [App\Http\Controllers\VersionController::class, 'updateOrCreate'])->name('updateOrCreate')->middleware('auth');
+
+
 
 
 

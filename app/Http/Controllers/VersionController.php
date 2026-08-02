@@ -7,8 +7,6 @@ use App\Models\Version;
 
 class VersionController extends Controller
 {
-
-
     public function version_all() {
         // $versions = Version::all();
         $versions = Version::where('status', 'сделано')->get();
@@ -37,7 +35,7 @@ class VersionController extends Controller
         // Version::create([
         //     'version' => '0.1.6',
         //     'theme' => 'Персоны',
-        //     'desc' => 'Переход к редактированию персоны через ввод с подсказкой, на странице редактирования персон.',
+        //     'desc' => 'Переход к редактированию персоны через ввод.',
         //     'status' => 'сделано',
         // ]);
         foreach($versionsArr as $item) {
@@ -59,9 +57,9 @@ class VersionController extends Controller
     public function version_del(){
         // удаление (Soft Delete)
         /*
-        $version = Version::find(6);
+        $version = Version::find(10);
         $version->delete();
-        dd('is deleted');
+        dd($version->version, 'is deleted');
         */
 
         // восстановление 
@@ -70,5 +68,38 @@ class VersionController extends Controller
         $ver->restore();
         dd('restore');
         */
+    }
+
+    // firstOrCreate
+    public function firstOrCreate(){
+        $version = Version::find(5);
+        
+        $versionAnother = [
+                'version' => '0.1.5',
+                'theme' => 'Персоны',
+                'desc' => 'Переход к редактированию персоны с общего списка ЦА.',
+                'status' => 'сделано',
+            ];
+
+        $version = Version::firstOrCreate([
+            'version' => '0.1.5 first',
+            ],$versionAnother);
+        dump($version->version, $version->status);
+        dump('firstOrCreate');
+    }
+    
+    // updateOrCreate
+    public function updateOrCreate(){
+        $version = Version::find(5);
+        $versionAnother = [
+                'version' => '0.1.5 update',
+                'theme' => 'Персоны',
+                'desc' => 'Переход к редактированию персоны с общего списка ЦА.',
+                'status' => 'не начато',
+            ];
+        $version = Version::updateOrCreate([
+            'version' => '0.1.5 update'
+        ], $versionAnother);
+        dd('update or create');
     }
 }
