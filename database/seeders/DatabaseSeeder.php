@@ -23,5 +23,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UserRootadm::class);
         $this->call(Pol::class);
         $this->call(Person10::class);
+        $this->call(Versions::class);
     }
 }
