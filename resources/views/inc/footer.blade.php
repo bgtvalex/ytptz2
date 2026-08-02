@@ -5,6 +5,6 @@
     YTPTZ
   </a> -->
 	<a class="ver" href="{{ route('versions') }}">
-    v0.1.12.1
+    v0.1.12.4: Versions
   </a>
 </footer>

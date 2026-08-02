@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('versions', function (Blueprint $table) {
             $table->id();
             $table->string('version');
+            $table->string('sub_version');
             $table->string('theme');
             $table->text('desc');
             $table->string('status'); // в процессе / сделано / отменено / отложено 
