@@ -7,6 +7,8 @@ use App\Models\Version;
 
 class VersionController extends Controller
 {
+
+
     public function version_all() {
         // $versions = Version::all();
         $versions = Version::where('status', 'сделано')->get();
@@ -55,8 +57,18 @@ class VersionController extends Controller
     }
 
     public function version_del(){
+        // удаление (Soft Delete)
+        /*
         $version = Version::find(6);
         $version->delete();
-        dd( $version->version,' is deleted');
+        dd('is deleted');
+        */
+
+        // восстановление 
+        /*
+        $ver = Version::withTrashed()->find(6);
+        $ver->restore();
+        dd('restore');
+        */
     }
 }
