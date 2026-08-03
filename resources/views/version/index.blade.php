@@ -1,12 +1,11 @@
-@extends('layouts.single')
+@extends('layouts.versions')
 
 @section('page-title')
-Версии (и их описание)
+VERSION Версии (и их описание) 
 @endsection
 
 
 @section('content')
-
 <div class="accordion" id="accordionExample">
   <div class="accordion-item">
     <h2 class="accordion-header">
@@ -17,6 +16,14 @@
     <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#accordionExample">
       <div class="accordion-body">
          <ul>
+
+          @foreach($versions as $version)
+            <li><b>[{{$version->version}}]</b>  <b><i>{{$version->theme}}:</i></b> {{$version->desc}} ({{$version->status}})</li>
+          @endforeach
+
+
+
+
 					<li><b>[0.1.1]</b>  <b><i>Общее:</i></b> (С точки зрения безопасности) Просмотр/редактирование данных доступен только с авторизацией.</li>
 					<li><b>[0.1.2]</b>  <b><i>Персоны:</i></b> Ввод и хранение сведений персон: ФИО, дата рождения, место рождения, контакты (телефон, соцсети, мессенджер), комментарий служителей.</li>
 					<li><b>[0.1.3]</b>  <b><i>Персоны:</i></b> Просмотр общего списка ЦА.</li>

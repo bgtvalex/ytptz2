@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Spatie\FlareClient\View;
+use Spatie\FlareClient\View;   
 use App\Http\Requests\NewPersonRequest;
 use App\Models\Person;
 use App\Models\Leader;

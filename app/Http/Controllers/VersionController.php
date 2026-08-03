@@ -3,55 +3,42 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Spatie\FlareClient\View;
+use App\Http\Requests\NewVersionRequest;
 use App\Models\Version;
+use Illuminate\Support\Facades\DB;
 
 class VersionController extends Controller
 {
-    public function version_all() {
-        // $versions = Version::all();
-        $versions = Version::where('status', 'сделано')->get();
-        $str = 'version';
-        foreach($versions as $version) {
-            dump($version->version);
-        }
+    public function index() {
+        $versions = Version::all();
+        return view('version.index', compact('versions'));
     }
 
-    public function version_add() {
-        $versionsArr = [
-            [
-                'version' => '0.1.7',
-                'theme' => 'Персоны',
-                'desc' => 'Добавление персоны в общий список ЦА.',
-                'status' => 'сделано',
-            ],
-            [
-                'version' => '0.1.8',
-                'theme' => 'Персоны',
-                'desc' => 'В списках персон номер телефона интерактивен: если у персоны указан номер телефона, ему можно сразу позвонить в один клик.',
-                'status' => 'сделано',
-            ],
-        ];
+    public function create() {
+        $versions = Version::all();
+        return view('version.create', compact('versions'));
+    }
 
-        // Version::create([
-        //     'version' => '0.1.6',
-        //     'theme' => 'Персоны',
-        //     'desc' => 'Переход к редактированию персоны через ввод.',
-        //     'status' => 'сделано',
-        // ]);
-        foreach($versionsArr as $item) {
-           Version::create($item);
-        }
-
-        dd('created!!!');
+    public function store() {
+        $data = request()->validate([
+            'version' => 'string',
+            'theme' => 'string',
+            'desc' => 'string',
+            'status' => 'string',
+        ]);
+        Version::create($data);
+        return redirect()->route('versions.index');
     }
 
     public function version_edit(){
-        $version = Version::find(5);
-        $version->update([
-                'status' => 'в процессе',
-            ]
-        );
-        dd('updated');
+        $versions = Version::all();
+        // $version->update([
+        //         'status' => 'в процессе',
+        //     ]
+        // );
+        // dd('updated');
+        return view('version_edit', compact('versions'));
     }
 
     public function version_del(){

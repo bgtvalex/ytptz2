@@ -22,6 +22,9 @@ use App\Models\Tip_vstrechi;
 
 
 
+
+
+
 // AUTH PAGE ============================================
 
 Route::get('/', function () {
@@ -35,6 +38,9 @@ Auth::routes();
 
 Route::get('/logout', [App\Http\Controllers\LogoutController::class, 'perform'])->name('logout');
 
+
+
+
 // MAIN PAGE ============================================
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -43,6 +49,10 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::get('/changelog', function () {
     return view('changelog');
 })->name('changelog')->middleware('auth');
+
+
+
+
 
 
 // PERSONS ============================================
@@ -69,6 +79,9 @@ Route::get('/person/all',
     [App\Http\Controllers\PersonController::class, 'person_all'])->name('person_all')->middleware('auth');
 
 
+
+
+
 // VSTRECHA ============================================
 
 Route::get('/vstrecha_add',
@@ -79,6 +92,9 @@ Route::post('/vstrecha_add',
 
 Route::get('/vstrecha_all',
     [App\Http\Controllers\VstrechaController::class, 'vstrecha_all'])->name('vstrecha_all')->middleware('auth');
+
+
+
 
 
 // LEADERS ============================================
@@ -99,17 +115,20 @@ Route::get('/leaders_edit', function () {
 })->name('leaders_edit')->middleware('auth');
 
 
+
+
+
 // VERSIONS ============================================
 
-Route::get('/versions', function () {
-    return view('versions');
-})->name('versions')->middleware('auth');
+Route::get('/versions', 
+    [App\Http\Controllers\VersionController::class, 'index'])->name('versions.index')->middleware('auth');
 
-Route::get('/version', 
-    [App\Http\Controllers\VersionController::class, 'version_all'])->name('version')->middleware('auth');
+// create versions
+Route::get('/versions/create', 
+    [App\Http\Controllers\VersionController::class, 'create'])->name('version.create')->middleware('auth');
 
-Route::get('/version_add', 
-    [App\Http\Controllers\VersionController::class, 'version_add'])->name('version_add')->middleware('auth');
+Route::post('/versions', 
+    [App\Http\Controllers\VersionController::class, 'store'])->name('version.store')->middleware('auth');
 
 Route::get('/version_edit', 
     [App\Http\Controllers\VersionController::class, 'version_edit'])->name('version_edit')->middleware('auth');

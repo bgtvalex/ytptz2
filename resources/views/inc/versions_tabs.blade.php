@@ -1,14 +1,14 @@
 <ul class="nav nav-tabs">
   <li class="nav-item">
-    <a class="nav-link {{ Route::currentRouteName()=='person_all' ? 'active' : null }}"
-    href="{{ route('person_all') }}">Список</a>
+    <a class="nav-link {{ Route::currentRouteName()=='versions' ? 'active' : null }}"
+    href="{{ route('versions.index') }}">Журнал</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link {{ Route::currentRouteName()=='person_add' ? 'active' : null }}"
-    href="{{ route('person_add') }}">Добавить</a>
+    <a class="nav-link {{ Route::currentRouteName()=='version_add' ? 'active' : null }}"
+    href="{{ route('version.create') }}">Добавить</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link {{ strncmp(Route::currentRouteName(),'person_edit',11)==0 ? 'active' : null }}"
-    href="{{ route('person_edit_page') }}">Изменить</a>
+    <a class="nav-link {{ strncmp(Route::currentRouteName(),'version_edit',11)==0 ? 'active' : null }}"
+    href="{{ route('version_edit') }}">Изменить</a>
   </li>
 </ul>
