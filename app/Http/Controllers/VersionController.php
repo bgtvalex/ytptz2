@@ -31,30 +31,29 @@ class VersionController extends Controller
         return redirect()->route('versions.index');
     }
 
-    public function version_edit(){
-        $versions = Version::all();
-        // $version->update([
-        //         'status' => 'в процессе',
-        //     ]
-        // );
-        // dd('updated');
-        return view('version_edit', compact('versions'));
+    public function show(Version $version) {
+       return view('version.show', compact('version'));
     }
 
-    public function version_del(){
-        // удаление (Soft Delete)
-        /*
-        $version = Version::find(10);
-        $version->delete();
-        dd($version->version, 'is deleted');
-        */
+    public function edit(Version $version) {
+       return view('version.edit', compact('version'));
+    // dd($version);
+    }
 
-        // восстановление 
-        /*
-        $ver = Version::withTrashed()->find(6);
-        $ver->restore();
-        dd('restore');
-        */
+    public function update(Version $version){
+        $data = request()->validate([
+            'version' => 'string',
+            'theme' => 'string',
+            'desc' => 'string',
+            'status' => 'string',
+        ]);
+        $version->update($data);
+        return redirect()->route('versions.index');
+    }
+
+    public function destroy(Version $version){
+        $version->delete();
+        return redirect()->route('versions.index');
     }
 
     // firstOrCreate

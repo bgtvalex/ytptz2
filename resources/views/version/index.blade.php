@@ -18,12 +18,19 @@ VERSION Версии (и их описание)
          <ul>
 
           @foreach($versions as $version)
-            <li><b>[{{$version->version}}]</b>  <b><i>{{$version->theme}}:</i></b> {{$version->desc}} ({{$version->status}})</li>
+          <li><b>[{{$version->version}}]</b>  <b><i>{{$version->theme}}:</i></b> {{$version->desc}} <b style="color: green;">({{$version->status}})</b> 
+            <a href="{{route('version.edit', $version->id)}}"><img src="/img/pen.png" alt="" class="version-edit"></a>
+            <form action="{{route('version.delete', $version->id)}}" method="post" style="display: inline;">
+              @csrf
+              @method('delete')
+            <a href="{{route('version.delete', $version->id)}}" type="submit"><img src="/img/del.png" alt="" class="version-edit"></a>
+            </form>
+          </li>
           @endforeach
 
 
 
-
+          <!--
 					<li><b>[0.1.1]</b>  <b><i>Общее:</i></b> (С точки зрения безопасности) Просмотр/редактирование данных доступен только с авторизацией.</li>
 					<li><b>[0.1.2]</b>  <b><i>Персоны:</i></b> Ввод и хранение сведений персон: ФИО, дата рождения, место рождения, контакты (телефон, соцсети, мессенджер), комментарий служителей.</li>
 					<li><b>[0.1.3]</b>  <b><i>Персоны:</i></b> Просмотр общего списка ЦА.</li>
@@ -35,6 +42,7 @@ VERSION Версии (и их описание)
 					<li><b>[0.1.9]</b>  <b><i>Встречи:</i></b> Функционал добавления встреч, с указанием даты, вида встречи, ответственного (опционально) и темы (опционально), а также списка посетивших.</li>
 					<li><b>[0.1.11 - 19.03.2026]</b>  <b><i>Адаптивность</i></b> под различные экраны.</li>
 					<li><b>[0.1.12 - 19.03.2026]</b>  <b><i>Версионность:</i></b> Введена версионность разработки, а так же журнал с номерами версий.</li>
+-->
 				 </ul>
     </div>
   </div>

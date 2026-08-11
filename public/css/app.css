@@ -33,7 +33,9 @@ main {
     color: var(--bs-link-color);
     text-decoration: none;
 }
-
+.version-edit {
+    width: 15px;
+}
 .ver {
     font-size: 12px !important;
     display: flex;

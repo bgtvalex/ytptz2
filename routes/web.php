@@ -127,14 +127,20 @@ Route::get('/versions',
 Route::get('/versions/create', 
     [App\Http\Controllers\VersionController::class, 'create'])->name('version.create')->middleware('auth');
 
+Route::get('/versions/{version}', 
+    [App\Http\Controllers\VersionController::class, 'show'])->name('version.show')->middleware('auth');
+
+Route::get('/versions/{version}/edit', 
+    [App\Http\Controllers\VersionController::class, 'edit'])->name('version.edit')->middleware('auth');
+
+Route::patch('/versions/{version}', 
+    [App\Http\Controllers\VersionController::class, 'update'])->name('version.update')->middleware('auth');
+
 Route::post('/versions', 
     [App\Http\Controllers\VersionController::class, 'store'])->name('version.store')->middleware('auth');
 
-Route::get('/version_edit', 
-    [App\Http\Controllers\VersionController::class, 'version_edit'])->name('version_edit')->middleware('auth');
-
-Route::get('/version_del', 
-    [App\Http\Controllers\VersionController::class, 'version_del'])->name('version_del')->middleware('auth');
+Route::get('/versions/{version}', 
+    [App\Http\Controllers\VersionController::class, 'destroy'])->name('version.delete')->middleware('auth');
 
 Route::get('/version_first_or_create', 
     [App\Http\Controllers\VersionController::class, 'firstOrCreate'])->name('firstOrCreate')->middleware('auth');
