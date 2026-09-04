@@ -41,7 +41,7 @@
 
     <div class="form-group col-12">
       <div class="input-group">
-      <span class="input-group-text" id="otvetstvenny">Ответственный:</span>
+      <span class="input-group-text" id="otvetstvenny">Ответственный<span class="text-danger">*</span>:</span>
         <select class="form-select" name="otvetstvenny" placeholder="ФИО" aria-describedby="otvetstvenny">
           <option value="null" selected>Не указан</option>
           @foreach($leaders as $leader)

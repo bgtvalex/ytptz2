@@ -1,7 +1,7 @@
 @extends('layouts.versions')
 
 @section('page-title')
-VERSION Версии (и их описание) 
+VERSIONS Версии (и их описание) 
 @endsection
 
 

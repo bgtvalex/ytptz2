@@ -44,25 +44,29 @@ class VstrechaController extends Controller
         $vstrecha = new Vstrecha();
         $vstrecha->data = $req->input('data');
         $vstrecha->tip_id = $req->input('tip_id');
-        $vstrecha->otvetstvenny_id = $req->input('otvetstvenny');
+        if ($req->input('otvetstvenny')) {
+            $vstrecha->otvetstvenny_id = $req->input('otvetstvenny');
+        }
         $vstrecha->theme = $req->input('theme');
         $vstrecha->place = $req->input('place');
         $vstrecha->save();
 
         // Добавить новые персоны (гостей)
         // Разбиение строки с данными по новым персонам, на отдельные персоны
-        $new_persons = array();
-        $new_persons = explode(',', $req->input('new_persons'));
-        foreach ($new_persons as $new_person_fio) {
-            $person = new Person;
-            $person->fio = $new_person_fio;
-            $person->active = 0;
-            $person->save();
-            // Создать посещение
-            $visit = new Visit;
-            $visit->vstrecha_id = $vstrecha->id;
-            $visit->person_id = $person->id;
-            $visit->save();
+        if ($req->input('new_person')) {
+            $new_persons = array();
+            $new_persons = explode(',', $req->input('new_persons'));
+                foreach ($new_persons as $new_person_fio) {
+                    $person = new Person;
+                    $person->fio = $new_person_fio;
+                    $person->active = 0;
+                    $person->save();
+                    // Создать посещение
+                    $visit = new Visit;
+                    $visit->vstrecha_id = $vstrecha->id;
+                    $visit->person_id = $person->id;
+                    $visit->save();
+                }
         }
 
         // Добавить посещения
@@ -109,7 +113,61 @@ class VstrechaController extends Controller
         return view('vstrecha_all', ['vstrechi' => $all_vstrechas]);
     }
 
-}
+
+
+
+// ТАБЛИЦА ПОСЕЩЕНИЙ
+
+public function visits_table() {
+    // 1. Получаем плоский список
+    $rows = DB::select("
+        SELECT
+        persons.id AS person_id,
+        persons.fio AS person_name,
+        vstrechi.id AS vstrechi_id,
+        vstrechi.theme AS vstrechi_theme,
+        vstrechi.tip_id, vstrechi.data,
+        visits.id IS NOT NULL AS attended
+        FROM persons
+        CROSS JOIN vstrechi
+        LEFT JOIN visits
+            ON visits.person_id = persons.id
+            AND vstrechi.id = visits.id
+        ORDER BY persons.fio, vstrechi.theme;
+        ");
+
+        // 2. Собираем уникальные мероприятия (заголовки столбцов)
+        $vstrechi = collect($rows)
+            ->unique('vsctrechi_id')
+            ->sortBy('vsctrechi_title')
+            ->pluck('vsctrechi_title', 'vsctrechi_id');
+
+        // 3. Группируем по персоне
+        $byPerson = collect($rows)->groupBy('person_id');
+
+        // 4. Формируем матрицу: [vsctrechi => ['+' или '']]
+        $matrix = $byPerson->map(function ($personRows, $personId) use ($vstrechi) {
+            $person = $personRows->first(); // имя персоны
+            $rowData = [];
+
+            foreach ($vstreshi as $vsctrechi_id => $vsctrechiTitle) {
+                $attended = $personRows->first(fn($r) => $r->vsctrechi_id === $vsctrechiId)?->attended ?? false;
+                $rowData[$vsctrechiTitle] = $attended ? '+' : '';
+            }
+
+            return [
+                'person_id'    => $personId,
+                'person_name'  => $person->person_name,
+                ...$rowData,
+            ];
+        })->values();
+        
+        return response()->json([
+           'columns' => $vstrechi->all(),
+           'rows'    => $matrix,
+        ]);
+    }
+
 
 /*Schema::create('vstrechi', function (Blueprint $table) {
     $table->id()->autoIncrement();
@@ -122,3 +180,5 @@ class VstrechaController extends Controller
     $table->string('place',100)->nullable();
     $table->timestamps();
 });*/
+
+};

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('tip_id');
             $table->foreign('tip_id')->references('id')->on('tips_vstrechi');
             $table->unsignedBigInteger('otvetstvenny_id')->nullable();
-            $table->foreign('otvetstvenny_id')->references('id')->on('persons');
+            $table->foreign('otvetstvenny_id')->references('id')->on('persons')->nullable();
             $table->string('theme',100)->nullable();
             $table->string('place',100)->nullable();
             $table->timestamps();

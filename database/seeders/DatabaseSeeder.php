@@ -24,5 +24,6 @@ class DatabaseSeeder extends Seeder
         $this->call(Pol::class);
         $this->call(Person10::class);
         $this->call(Versions::class);
+        $this->call(Tips::class);
     }
 }
