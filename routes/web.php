@@ -93,6 +93,8 @@ Route::post('/vstrecha_add',
 Route::get('/vstrecha_all',
     [App\Http\Controllers\VstrechaController::class, 'vstrecha_all'])->name('vstrecha_all')->middleware('auth');
 
+Route::get('/visits_table',
+    [App\Http\Controllers\VstrechaController::class, 'visits_table'])->name('visits_table')->middleware('auth');
 
 
 

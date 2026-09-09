@@ -115,58 +115,77 @@ class VstrechaController extends Controller
 
 
 
-
 // ТАБЛИЦА ПОСЕЩЕНИЙ
 
 public function visits_table() {
     // 1. Получаем плоский список
     $rows = DB::select("
         SELECT
-        persons.id AS person_id,
-        persons.fio AS person_name,
-        vstrechi.id AS vstrechi_id,
-        vstrechi.theme AS vstrechi_theme,
-        vstrechi.tip_id, vstrechi.data,
-        visits.id IS NOT NULL AS attended
+            persons.id AS person_id,
+            persons.fio AS person_name,
+            vstrechi.id AS vstrechi_id,
+            vstrechi.theme AS vstrechi_theme,
+            DATE_FORMAT(vstrechi.data, '%d.%m.%Y') AS vstrechi_data,
+            visits.id IS NOT NULL AS attended,
+            vstrechi.otvetstvenny_id AS otv_id,
+            resp.fio AS otv_name
         FROM persons
         CROSS JOIN vstrechi
         LEFT JOIN visits
             ON visits.person_id = persons.id
-            AND vstrechi.id = visits.id
-        ORDER BY persons.fio, vstrechi.theme;
-        ");
+            AND vstrechi.id = visits.vstrecha_id
+        LEFT JOIN persons AS resp
+            ON resp.id = vstrechi.otvetstvenny_id
+        ORDER BY persons.fio, vstrechi.theme
+    ");
 
-        // 2. Собираем уникальные мероприятия (заголовки столбцов)
-        $vstrechi = collect($rows)
-            ->unique('vsctrechi_id')
-            ->sortBy('vsctrechi_title')
-            ->pluck('vsctrechi_title', 'vsctrechi_id');
+    // 2. Собираем уникальные мероприятия (заголовки столбцов)
+    $vstrechi = collect($rows)
+        ->unique('vstrechi_id')
+        ->sortBy('vstrechi_data')
+        ->pluck('vstrechi_data', 'vstrechi_id');
 
-        // 3. Группируем по персоне
-        $byPerson = collect($rows)->groupBy('person_id');
-
-        // 4. Формируем матрицу: [vsctrechi => ['+' или '']]
-        $matrix = $byPerson->map(function ($personRows, $personId) use ($vstrechi) {
-            $person = $personRows->first(); // имя персоны
-            $rowData = [];
-
-            foreach ($vstreshi as $vsctrechi_id => $vsctrechiTitle) {
-                $attended = $personRows->first(fn($r) => $r->vsctrechi_id === $vsctrechiId)?->attended ?? false;
-                $rowData[$vsctrechiTitle] = $attended ? '+' : '';
-            }
-
+    // 2. Собираем уникальные мероприятия со всеми нужными полями
+    $vstrechi = collect($rows)
+        ->unique('vstrechi_id')
+        ->sortBy('vstrechi_data')
+        ->map(function ($row) {
             return [
-                'person_id'    => $personId,
-                'person_name'  => $person->person_name,
-                ...$rowData,
+                'vstrechi_id'          => $row->vstrechi_id,
+                'vstrechiTheme'       => $row->vstrechi_theme,
+                'vstrechi_data'        => $row->vstrechi_data,          // подставь реальное поле даты из БД
+                'otv_name' => $row->otv_name,   // подставь поле ответственного
             ];
-        })->values();
-        
-        return response()->json([
-           'columns' => $vstrechi->all(),
-           'rows'    => $matrix,
-        ]);
-    }
+        })
+        ->values(); // сбросить ключи, чтобы был обычный список [0,1,2...]
+
+
+    // DateTime::createFromFormat('YYYY-mm-dd', $meetingDate)->format('d.m.Y')
+    // 3. Группируем по персоне
+    $byPerson = collect($rows)->groupBy('person_id');
+
+    // 4. Формируем матрицу
+    $matrix = $byPerson->map(function ($personRows, $personId) use ($vstrechi) {
+        $person = $personRows->first();
+        $rowData = [];
+
+        foreach ($vstrechi as $meeting) {
+            $attended = $personRows->first(fn($r) => $r->vstrechi_id === $meeting['vstrechi_id'])?->attended ?? false;
+            $rowData[$meeting['vstrechi_id']] = $attended ? '+' : '';
+        }
+
+        return [
+            'person_id'   => $personId,
+            'person_name' => $person->person_name,
+            ...$rowData,
+        ];
+    })->values();
+
+    return view('visits_table', [
+        'columns' => $vstrechi->values(),
+        'rows'    => $matrix,
+    ]);
+}
 
 
 /*Schema::create('vstrechi', function (Blueprint $table) {
