@@ -41,3 +41,24 @@ main {
     display: flex;
     justify-content: end;
 }
+
+/* ТАБЛИЦА ПОСЕЩЕНИЙ */
+.visits-table > thead {
+    vertical-align: top !important;
+}
+
+.visits-table__data {
+    width: 30px;
+    text-align: left;
+}
+.visits-table__data a {
+    text-decoration: none;
+    writing-mode: vertical-lr;
+    color: #212529;
+    font-size: 12px;
+}
+
+.vst.text-center {
+    width: 5px;
+    font-size: 18px;
+}
