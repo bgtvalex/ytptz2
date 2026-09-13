@@ -14,7 +14,7 @@
             @foreach ($columns as $meeting)
                 <th>
                     <a href="#" data-bs-toggle="tooltip" data-bs-html="true"
-                    data-bs-title="{{ $meeting['vstrechiTheme'] }}<br>отв.{{ $meeting['otv_name'] }}">
+                       data-bs-title="{{ $meeting['vstrechiTheme'] }}<br>отв.{{ $meeting['otv_name'] }}">
                         {{ $meeting['vstrechi_data'] }}
                     </a>
                 </th>
@@ -26,6 +26,7 @@
             <tr>
                 <td>{{ $row['person_name'] }}</td>
                 @foreach ($columns as $m)
+                    {{-- Ключ точно такой же, как в контроллере --}}
                     <td class="text-center">{{ $row[$m['vstrechi_id']] ?? '' }}</td>
                 @endforeach
             </tr>

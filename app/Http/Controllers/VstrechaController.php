@@ -51,7 +51,7 @@ class VstrechaController extends Controller
         $vstrecha->place = $req->input('place');
         $vstrecha->save();
 
-        
+
         // Добавить новые персоны (гостей)
         // Разбиение строки с данными по новым персонам, на отдельные персоны
         if ($req->input('new_persons')) {
@@ -118,8 +118,9 @@ class VstrechaController extends Controller
 
 // ТАБЛИЦА ПОСЕЩЕНИЙ
 
-public function visits_table() {
-    // 1. Получаем плоский список
+public function visits_table()
+{
+    // 1. Плоский список
     $rows = DB::select("
         SELECT
             persons.id AS person_id,
@@ -134,56 +135,48 @@ public function visits_table() {
         CROSS JOIN vstrechi
         LEFT JOIN visits
             ON visits.person_id = persons.id
-            AND vstrechi.id = visits.vstrecha_id
+            AND visits.vstrecha_id = vstrechi.id
         LEFT JOIN persons AS resp
             ON resp.id = vstrechi.otvetstvenny_id
-        ORDER BY persons.fio, vstrechi.theme
+        ORDER BY persons.fio, vstrechi.data, vstrechi.theme
     ");
 
-    // 2. Собираем уникальные мероприятия (заголовки столбцов)
-    $vstrechi = collect($rows)
+    // 2. Фиксируем порядок столбцов (уникальные встречи, отсортированные по дате)
+    $meetings = collect($rows)
         ->unique('vstrechi_id')
         ->sortBy('vstrechi_data')
-        ->pluck('vstrechi_data', 'vstrechi_id');
-
-    // 2. Собираем уникальные мероприятия со всеми нужными полями
-    $vstrechi = collect($rows)
-        ->unique('vstrechi_id')
-        ->sortBy('vstrechi_data')
-        ->map(function ($row) {
+        ->map(function ($m) {
             return [
-                'vstrechi_id'          => $row->vstrechi_id,
-                'vstrechiTheme'       => $row->vstrechi_theme,
-                'vstrechi_data'        => $row->vstrechi_data,          // подставь реальное поле даты из БД
-                'otv_name' => $row->otv_name,   // подставь поле ответственного
+                'vstrechi_id'   => $m->vstrechi_id,
+                'vstrechiTheme' => $m->vstrechi_theme,
+                'vstrechi_data' => $m->vstrechi_data,
+                'otv_name'      => $m->otv_name,
             ];
         })
-        ->values(); // сбросить ключи, чтобы был обычный список [0,1,2...]
+        ->values();
 
-
-    // DateTime::createFromFormat('YYYY-mm-dd', $meetingDate)->format('d.m.Y')
     // 3. Группируем по персоне
     $byPerson = collect($rows)->groupBy('person_id');
 
-    // 4. Формируем матрицу
-    $matrix = $byPerson->map(function ($personRows, $personId) use ($vstrechi) {
+    // 4. Строим матрицу: сохраняем реальные ID встреч как ключи
+    $matrix = $byPerson->map(function ($personRows) use ($meetings) {
         $person = $personRows->first();
-        $rowData = [];
 
-        foreach ($vstrechi as $meeting) {
-            $attended = $personRows->first(fn($r) => $r->vstrechi_id === $meeting['vstrechi_id'])?->attended ?? false;
-            $rowData[$meeting['vstrechi_id']] = $attended ? '+' : '';
+        $result = [
+            'person_id'   => $person->person_id,
+            'person_name' => $person->person_name,
+        ];
+
+        foreach ($meetings as $meeting) {
+            $row = $personRows->first(fn($r) => $r->vstrechi_id === $meeting['vstrechi_id']);
+            $result[$meeting['vstrechi_id']] = $row && $row->attended ? '+' : '';
         }
 
-        return [
-            'person_id'   => $personId,
-            'person_name' => $person->person_name,
-            ...$rowData,
-        ];
+        return $result;
     })->values();
 
     return view('visits_table', [
-        'columns' => $vstrechi->values(),
+        'columns' => $meetings,
         'rows'    => $matrix,
     ]);
 }
