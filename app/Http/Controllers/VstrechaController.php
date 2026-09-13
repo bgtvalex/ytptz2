@@ -51,9 +51,10 @@ class VstrechaController extends Controller
         $vstrecha->place = $req->input('place');
         $vstrecha->save();
 
+        
         // Добавить новые персоны (гостей)
         // Разбиение строки с данными по новым персонам, на отдельные персоны
-        if ($req->input('new_person')) {
+        if ($req->input('new_persons')) {
             $new_persons = array();
             $new_persons = explode(',', $req->input('new_persons'));
                 foreach ($new_persons as $new_person_fio) {
