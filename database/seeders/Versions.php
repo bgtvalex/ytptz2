@@ -10,55 +10,204 @@ use Illuminate\Support\Facades\DB;
 class Versions extends Seeder
 {
     static $versions = [
-            [
-                'version' => '0.1.1',
-                'theme' => 'Общее',
-                'desc' => '(С точки зрения безопасности) Просмотр/редактирование данных доступен только с авторизацией.',
-                'status' => 'сделано',
-            ],
-            [
-                'version' => '0.1.2',
-                'theme' => 'Персоны',
-                'desc' => 'Ввод и хранение сведений персон: ФИО, дата рождения, место рождения, контакты (телефон, соцсети, мессенджер), комментарий служителей.',
-                'status' => 'сделано',
-            ],
-            [
-                'version' => '0.1.3',
-                'theme' => 'Персоны',
-                'desc' => 'Просмотр общего списка ЦА.',
-                'status' => 'сделано',
-            ],
-            [
-                'version' => '0.1.4',
-                'theme' => 'Персоны',
-                'desc' => 'Просмотр/редактирование персон.',
-                'status' => 'сделано',
-            ],
-            [
-                'version' => '0.1.5',
-                'theme' => 'Персоны',
-                'desc' => 'Переход к редактированию персоны с общего списка ЦА.',
-                'status' => 'сделано',
-            ],
-            [
-                'version' => '0.1.6',
-                'theme' => 'Персоны',
-                'desc' => 'Переход к редактированию персоны через ввод с подсказкой, на странице редактирования персон.',
-                'status' => 'сделано',
-            ],
-            [
-                'version' => '0.1.7',
-                'theme' => 'Персоны',
-                'desc' => 'Добавление персоны в общий список ЦА.',
-                'status' => 'сделано',
-            ],
-            [
-                'version' => '0.1.8',
-                'theme' => 'Персоны',
-                'desc' => 'В списках персон номер телефона интер активен: если у персоны указан номер телефона, ему можно сразу позвонить в один клик.',
-                'status' => 'сделано',
-            ],
-        ];
+  [
+    'ver' => '0.1.0',
+    'theme' => 'Общее',
+    'description' => '(С точки зрения безопасности) Просмотр/редактирование данных доступен только с авторизацией.',
+    'status' => 'done',
+    'date' => ''
+  ],
+  [
+    'ver' => '0.2.0',
+    'theme' => 'Персоны',
+    'description' => 'Ввод и хранение сведений персон: ФИО, дата рождения, место рождения, контакты (телефон, соцсети, мессенджер), комментарий служителей.',
+    'status' => 'done',
+    'date' => ''
+  ],
+  [
+    'ver' => '0.3.0',
+    'theme' => 'Персоны',
+    'description' => '(С точки зрения безопасности) Просмотр/редактирование данных доступен только с авторизацией.',
+    'status' => 'done',
+    'date' => ''
+  ],
+  [
+    'ver' => '0.4.0',
+    'theme' => 'Персоны',
+    'description' => 'Просмотр/редактирование персон.',
+    'status' => 'done',
+    'date' => ''
+  ],
+  [
+    'ver' => '0.5.0',
+    'theme' => 'Персоны',
+    'description' => 'Переход к редактированию персоны с общего списка ЦА.',
+    'status' => 'done',
+    'date' => ''
+  ],
+  [
+    'ver' => '0.6.0',
+    'theme' => 'Персоны',
+    'description' => 'Переход к редактированию персоны через ввод с подсказкой, на странице редактирования персон.',
+    'status' => 'done',
+    'date' => ''
+  ],
+  [
+    'ver' => '0.7.0',
+    'theme' => 'Персоны',
+    'description' => 'Добавление персоны в общий список ЦА',
+    'status' => 'done',
+    'date' => ''
+  ],
+  [
+    'ver' => '0.8.0',
+    'theme' => 'Персоны',
+    'description' => 'В списках персон номер телефона интер активен: если у персоны указан номер телефона, ему можно сразу позвонить в один клик.',
+    'status' => 'done',
+    'date' => ''
+  ],
+  [
+    'ver' => '0.9.0',
+    'theme' => 'Мобильная версия 1',
+    'description' => '',
+    'status' => 'done',
+    'date' => '2026.03.17'
+  ],
+  [
+    'ver' => '0.10.0',
+    'theme' => 'Мобильная версия 2',
+    'description' => '',
+    'status' => 'done',
+    'date' => '2026.03.18'
+  ],
+  [
+    'ver' => '0.11.0',
+    'theme' => 'Versions',
+    'description' => '',
+    'status' => 'done',
+    'date' => '2026.03.19'
+  ],
+  [
+    'ver' => '0.12.0',
+    'theme' => 'Versions',
+    'description' => '',
+    'status' => 'done',
+    'date' => '2026.03.19'
+  ],
+  [
+    'ver' => '0.12.2',
+    'theme' => 'Versions',
+    'description' => '',
+    'status' => 'done',
+    'date' => '2026.03.19'
+  ],
+  [
+    'ver' => '0.12.3',
+    'theme' => 'Versions',
+    'description' => 'icon and date',
+    'status' => 'done',
+    'date' => '2026.03.20'
+  ],
+  [
+    'ver' => '0.13.0',
+    'theme' => 'Deploy',
+    'description' => 'deploy',
+    'status' => 'done',
+    'date' => '2026.03.24'
+  ],
+  [
+    'ver' => '0.12.1',
+    'theme' => 'Versions',
+    'description' => 'Model Version',
+    'status' => 'done',
+    'date' => '2026.08.01'
+  ],
+  [
+    'ver' => '0.12.2',
+    'theme' => 'Versions',
+    'description' => 'CRUD without View',
+    'status' => 'done',
+    'date' => '2026.08.01'
+  ],
+  [
+    'ver' => '0.12.3',
+    'theme' => 'Versions',
+    'description' => 'SoftDelete, Versions Migration Seed',
+    'status' => 'done',
+    'date' => '2026.08.02'
+  ],
+  [
+    'ver' => '0.12.4',
+    'theme' => 'Versions',
+    'description' => 'Restore',
+    'status' => 'done',
+    'date' => '2026.08.02'
+  ],
+  [
+    'ver' => '0.12.5',
+    'theme' => 'Versions',
+    'description' => 'firstOrCreate, updateOrCreate',
+    'status' => 'done',
+    'date' => '2026.08.02'
+  ],
+  [
+    'ver' => '0.12.6',
+    'theme' => 'Versions',
+    'description' => 'Migration: edit, delete',
+    'status' => 'done',
+    'date' => '2026.08.02'
+  ],
+  [
+    'ver' => '0.12.7',
+    'theme' => 'Versions',
+    'description' => 'View: index, create.',
+    'status' => 'done',
+    'date' => '2026.08.03'
+  ],
+  [
+    'ver' => '0.12.8',
+    'theme' => 'Versions',
+    'description' => 'Edit, Delete Version',
+    'status' => 'done',
+    'date' => '2026.08.11'
+  ],
+  [
+    'ver' => '0.13.1',
+    'theme' => 'Встречи.',
+    'description' => 'Встречи. Загрузка из БД',
+    'status' => 'done',
+    'date' => '2026.09.04'
+  ],
+  [
+    'ver' => '0.13.2',
+    'theme' => 'Встречи',
+    'description' => 'feat(general): добавлена таблица посещений',
+    'status' => 'done',
+    'date' => '2026.09.09'
+  ],
+  [
+    'ver' => '0.13.3',
+    'theme' => 'Встречи',
+    'description' => 'fix bug - guests not added in adding visits form',
+    'status' => 'done',
+    'date' => '2026.09.13'
+  ],
+  [
+    'ver' => '0.13.4',
+    'theme' => 'Встречи',
+    'description' => 'fix bug - uncorrect visits table view',
+    'status' => 'done',
+    'date' => '2026.09.13'
+  ],
+  [
+    'ver' => '0.14.0',
+    'theme' => 'Дизайн',
+    'description' => 'Убрать пустоты в заголовках',
+    'status' => 'done',
+    'date' => '2026.09.15'
+  ]
+];
+    
     /**
      * Run the database seeds.
      *
@@ -68,10 +217,11 @@ class Versions extends Seeder
     {
         foreach (self::$versions as $item) {
             DB::table('versions')->insert([
-                'version' => $item['version'],
+                'version' => $item['ver'],
                 'theme' => $item['theme'],
-                'desc' => $item['desc'],
+                'desc' => $item['description'],
                 'status' => $item['status'],
+                'date' => $item['date'],
             ]);
         }
     }

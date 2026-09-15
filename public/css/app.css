@@ -1,6 +1,4 @@
 @media screen and (max-width: 992px) {
-    .my-overfl-y {
-    }
     .table {
         min-width: 900px !important;
         overflow-y: auto;
