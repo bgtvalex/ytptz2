@@ -15,7 +15,6 @@
                 <th class="visits-table__data">
                     <a href="#" data-bs-toggle="tooltip" data-bs-html="true"
                     data-bs-title="{{ $meeting['vstrechiTheme'] }}<br>отв.{{ $meeting['otv_name'] }}">
-                        {{ $meeting['vstrechiTheme'] }}<br>
                         {{ $meeting['vstrechi_data'] }}
                     </a>
                 </th>
