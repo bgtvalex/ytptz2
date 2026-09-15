@@ -1,11 +1,6 @@
 @extends('layouts.app')
 
 
-@section('page-title')
-Сведения об аудитории
-@endsection
-
-
 @section('content')
 
 <!-- mTODO: https://codepen.io/massimo-cassandro/pen/NqRmMe -->

@@ -1,10 +1,5 @@
 @extends('layouts.versions')
 
-@section('page-title')
-VERSIONS Версии (и их описание) 
-@endsection
-
-
 @section('content')
 <div class="accordion" id="accordionExample">
   <div class="accordion-item">

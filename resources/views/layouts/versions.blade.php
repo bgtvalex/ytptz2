@@ -27,10 +27,10 @@
       @include('inc.aside')
 
       <main class="col-lg-10 ms-sm-auto col-xl-10 px-md-4">
-        <div
+        <!-- <div
           class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
           <h1 class="h2">@yield('page-title')</h1>
-        </div>
+        </div> -->
 
 
         @include('inc.versions_tabs')

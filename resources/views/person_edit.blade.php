@@ -1,11 +1,5 @@
 @extends('layouts.app')
 
-
-@section('page-title')
-Редактировать персону
-@endsection
-
-
 @section('content')
 
   @if (empty($data))
