@@ -1,11 +1,6 @@
 @extends('layouts.app')
 
 
-@section('page-title')
-Добавить персону
-@endsection
-
-
 @section('content')
 
 <form action="{{ route('post_person_add') }}" method="post">

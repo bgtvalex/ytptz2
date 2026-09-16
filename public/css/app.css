@@ -1,31 +1,35 @@
 @media screen and (max-width: 992px) {
-    .my-overfl-y {
-    }
     .table {
         min-width: 900px !important;
         overflow-y: auto;
     }
 }
 .navbar {
-    position: fixed !important;
+    /* position: fixed !important; */
     width: 100%;
 }
 .my-navigation {
     position: fixed;
     top: 27px;
     padding-top: 20px;
+    height: 80vh;
+    overflow-y: scroll;
     z-index: 1020;
 }
 
 main {
-    padding-top: 50px;
+    padding-top: 15px;
+    /* height: 80vh; */
 }
 
 .table {
     margin-bottom: 100px !important;
 }
 .footer {
-    justify-content: end;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    padding: 10px;
 }
 .logo,
 .ver,
@@ -40,4 +44,25 @@ main {
     font-size: 12px !important;
     display: flex;
     justify-content: end;
+}
+
+/* ТАБЛИЦА ПОСЕЩЕНИЙ */
+.visits-table > thead {
+    vertical-align: top !important;
+}
+
+.visits-table__data {
+    width: 30px;
+    text-align: left;
+}
+.visits-table__data a {
+    text-decoration: none;
+    writing-mode: vertical-lr;
+    color: #212529;
+    font-size: 12px;
+}
+
+.vst.text-center {
+    width: 5px;
+    font-size: 18px;
 }

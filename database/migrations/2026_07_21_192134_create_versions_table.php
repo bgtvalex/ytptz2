@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('theme');
             $table->text('desc');
             $table->string('status'); // в процессе / сделано / отменено / отложено 
+            $table->string('date');
             $table->timestamps();
 
             $table->softDeletes();

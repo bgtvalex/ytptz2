@@ -1,4 +1,5 @@
 <ul class="nav nav-tabs">
+  <h1 class="h2 px-2">Встречи</h1>
   <li class="nav-item">
     <a class="nav-link {{ Route::currentRouteName()=='vstrecha_add' ? 'active' : null }}" href="{{ route('vstrecha_add') }}">Добавить встречу</a>
   </li>

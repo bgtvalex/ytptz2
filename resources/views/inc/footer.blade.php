@@ -1,7 +1,7 @@
 @section('footer')
-<footer class="footer navbar bg-dark sticky-bottom center shadow">
+<footer class="footer bg-dark center shadow">
 	
-	<a class="ver" href="{{ route('versions.index') }}">
-    v1.13.1
+	<a class="ver" href="{{ route('versions.index') }}" title="Встречи: Вертикальные заголовки">
+    v1.14.0 - feature/bread-crumbs
   </a>
 </footer>

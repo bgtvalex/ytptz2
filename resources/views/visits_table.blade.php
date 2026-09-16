@@ -9,10 +9,10 @@
 
 <table class="visits-table table table-striped table-bordered mt-1">
     <thead>
-        <tr>
-            <th>Персона</th>
+        <tr class="visits-table__first-child">
+            <th class="visits-table-th">Персона</th>
             @foreach ($columns as $meeting)
-                <th>
+                <th class="visits-table__data">
                     <a href="#" data-bs-toggle="tooltip" data-bs-html="true"
                        data-bs-title="{{ $meeting['vstrechiTheme'] }}<br>отв.{{ $meeting['otv_name'] }}">
                         {{ $meeting['vstrechi_data'] }}
@@ -23,11 +23,10 @@
     </thead>
     <tbody>
         @foreach ($rows as $row)
-            <tr>
+            <tr class="visits-table__first-child">
                 <td>{{ $row['person_name'] }}</td>
                 @foreach ($columns as $m)
-                    {{-- Ключ точно такой же, как в контроллере --}}
-                    <td class="text-center">{{ $row[$m['vstrechi_id']] ?? '' }}</td>
+                    <td class="vstr text-center">{{ $row[$m['vstrechi_id']] ?? '' }}</td>
                 @endforeach
             </tr>
         @endforeach
