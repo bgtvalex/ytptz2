@@ -5,15 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Spatie\FlareClient\View;
 use App\Http\Requests\NewVersionRequest;
-use App\Models\Version;
+use App\Models\Tip_vstrechi;
 use Illuminate\Support\Facades\DB;
 
 class TypeVisitController extends Controller
 {
     public function index() {
         $types = Tip_vstrechi::all();
-        dd('Tips_vstrechi');
-        return view('type_visits', compact('tips_vstrechi'));
+        return view('type_visits/index', compact('types'));
     }
 
     public function create() {
