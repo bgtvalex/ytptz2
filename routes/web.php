@@ -99,6 +99,16 @@ Route::get('/visits_table',
 
 
 
+// VISITS-TYPE ===================
+
+Route::get('/type-visits',
+    [App\Http\Controllers\TypeVisitController::class, 'index'])->name('type-visits.index')->middleware('auth');
+
+Route::get('/type-visits/add',
+    [App\Http\Controllers\VstrechaController::class, 'visits_add-type/add'])->name('visits_add-type/add')->middleware('auth');
+
+
+
 // LEADERS ============================================
 
 Route::get('/leaders', function () {

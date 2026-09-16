@@ -36,6 +36,12 @@
         <a class="nav-link" href="{{ route('leaders_all') }}"><i class="bi bi-calendar3"></i> Календарь
         </a>
       </li>
+      <li class="nav-item dropdown">
+        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Справочники</button>
+        <ul class="dropdown-menu" aria-labelledby="conferences">
+          <li><a class="dropdown-item" href="{{ route('type-visits.index') }}">Виды встреч</a></li>
+        </ul>
+      </li>
     </ul>
 
 
