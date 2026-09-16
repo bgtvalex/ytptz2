@@ -24,7 +24,8 @@
     <tbody>
         @foreach ($rows as $row)
             <tr class="visits-table__first-child">
-                <td>{{ $row['person_name'] }}</td>
+                @if ($row['person_is_guest'] == 1) <td><em class="text-success">{{ $row['person_name'] }}</em></td> 
+                @else<td>{{ $row['person_name'] }}</td>@endif 
                 @foreach ($columns as $m)
                     <td class="vstr text-center">{{ $row[$m['vstrechi_id']] ?? '' }}</td>
                 @endforeach

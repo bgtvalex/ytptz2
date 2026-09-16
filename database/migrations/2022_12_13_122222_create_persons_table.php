@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('socials',100)->nullable();
             $table->string('comments',255)->nullable();
             $table->boolean('active')->default(1); // boolean === tinyInt
+            $table->boolean('guest')->default(1); // boolean === tinyInt
             $table->boolean('critical')->nullable();
             $table->boolean('is_leader')->default(0); // boolean === tinyInt
             $table->timestamps();

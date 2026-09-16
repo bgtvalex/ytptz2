@@ -36,7 +36,7 @@
         @elseif ($person_->pol_id == 1)
         <span>*</span>
         @endif
-        @if ($person_->active == 0)
+        @if ($person_->guest == 1)
           <i> {{ $person_->fio }} (гость)</i>
           <div class="ms-1 dropdown dropend d-inline">
             <button class="btn btn-outline-warning dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
