@@ -73,7 +73,8 @@ class VstrechaController extends Controller
                 foreach ($new_persons as $new_person_fio) {
                     $person = new Person;
                     $person->fio = $new_person_fio;
-                    $person->active = 0;
+                    $person->active = 1;
+                    $person->guest = 1;
                     $person->save();
                     // Создать посещение
                     $visit = new Visit;
@@ -129,6 +130,7 @@ public function visits_table()
         SELECT
             persons.id AS person_id,
             persons.fio AS person_name,
+            persons.guest AS person_is_guest,
             vstrechi.id AS vstrechi_id,
             vstrechi.theme AS vstrechi_theme,
             DATE_FORMAT(vstrechi.data, '%d.%m.%Y') AS vstrechi_data,
@@ -169,6 +171,7 @@ public function visits_table()
         $result = [
             'person_id'   => $person->person_id,
             'person_name' => $person->person_name,
+            'person_is_guest' => $person->person_is_guest,
         ];
 
         foreach ($meetings as $meeting) {

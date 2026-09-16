@@ -24,8 +24,12 @@ class PersonController extends Controller
         $person->telefon = $req->input('telefon');
         $person->socials = $req->input('socials');
         $person->comments = $req->input('comments');
+        if ($req->has('is_guest'))
+            $person->guest = 1; else $person->guest = 0;
         if ($req->has('is_leader'))
-            $person->is_leader = 1;
+            $person->is_leader = 1; else $person->is_leader = 0;
+        if ($req->has('is_active'))
+            $person->active = 1; else $person->active = 0;
         $person->save();
 
         return redirect()->route('person_all')->with('success','Персона успешно добавлена!');
@@ -34,9 +38,9 @@ class PersonController extends Controller
 
     public function person_all(Request $req)
     {
-        // Запросить посещения гостей (неактивных пользователей)
+        // Запросить посещения гостей
         $guests = Person::all()
-        ->where('active', "=", 0)
+        ->where('guest', "=", 1)
         ->sortBy('fio');
 
         foreach ($guests as $guest) {
@@ -83,10 +87,12 @@ class PersonController extends Controller
         $person->telefon = $req->input('telefon');
         $person->socials = $req->input('socials');
         $person->comments = $req->input('comments');
+        if ($req->has('is_guest'))
+            $person->guest = 1; else $person->guest = 0;
         if ($req->has('is_leader'))
-            $person->is_leader = 1;
-        else 
-            $person->is_leader = 0;
+            $person->is_leader = 1; else $person->is_leader = 0;
+        if ($req->has('is_active'))
+            $person->active = 1; else $person->active = 0;
 
         $person->save();
 
