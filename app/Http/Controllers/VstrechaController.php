@@ -36,10 +36,6 @@ class VstrechaController extends Controller
         ->sortBy('fio');
         $tips_vstrechi = Tip_vstrechi::all()->sortBy('id');
 
-        // Разбиение строки с данными по посетителям, на отдельных посетителей
-        $visitors = array();
-        $visitors = explode(',', $req->input('visitors'));
-
         // Создать встречу
         $vstrecha = new Vstrecha();
         $vstrecha->data = $req->input('data');
@@ -52,6 +48,23 @@ class VstrechaController extends Controller
         $vstrecha->save();
 
 
+        // Разбиение строки с данными по известным посетителям, на отдельных посетителей
+        $knownVisitors = $req->input('visitors');
+        if (!empty(trim($knownVisitors))) {
+            $visitors = array();
+            $visitors = explode(',', $knownVisitors);
+            
+            // Добавить посещения
+            foreach ($visitors as $visitor) {
+                // Создать посещение
+                $visit = new Visit;
+                $visit->vstrecha_id = $vstrecha->id;
+                $visit->person_id = $visitor;
+                $visit->save();
+            }
+        }
+
+        
         // Добавить новые персоны (гостей)
         // Разбиение строки с данными по новым персонам, на отдельные персоны
         if ($req->input('new_persons')) {
@@ -68,15 +81,6 @@ class VstrechaController extends Controller
                     $visit->person_id = $person->id;
                     $visit->save();
                 }
-        }
-
-        // Добавить посещения
-        foreach ($visitors as $visitor) {
-            // Создать посещение
-            $visit = new Visit;
-            $visit->vstrecha_id = $vstrecha->id;
-            $visit->person_id = $visitor;
-            $visit->save();
         }
         
         return view('vstrecha_add',
