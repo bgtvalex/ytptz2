@@ -36,12 +36,21 @@
         <a class="nav-link" href="{{ route('leaders_all') }}"><i class="bi bi-calendar3"></i> Календарь
         </a>
       </li>
-      <li class="nav-item dropdown">
-        <button type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">Справочники</button>
-        <ul class="dropdown-menu" aria-labelledby="conferences">
-          <li><a class="dropdown-item" href="{{ route('type-visits.index') }}">Виды встреч</a></li>
-        </ul>
-      </li>
+      <!-- START -->
+       <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <i class="bi bi-journal-text"></i> Справочники
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="{{ route('type-visits.index') }}">Виды Встреч</a></li>
+              <!-- <li><a class="dropdown-item" href="#">Другое действие</a></li> -->
+              <!-- <li>
+                <hr class="dropdown-divider">
+              </li> -->
+              <!-- <li><a class="dropdown-item" href="#">Что-то еще здесь</a></li> -->
+            </ul>
+          </li>
+       <!-- FINISH -->
     </ul>
 
 

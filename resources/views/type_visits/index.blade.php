@@ -1,4 +1,4 @@
-@extends('layouts.type-visits')
+@extends('layouts.type_visits')
 
 @section('content')
 <div class="accordion" id="accordionExample">

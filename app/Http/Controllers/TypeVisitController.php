@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\DB;
 class TypeVisitController extends Controller
 {
     public function index() {
-        // $types = Types::all();
-        // dd($types);
-        return view('type-visits');
+        $types = Tip_vstrechi::all();
+        dd('Tips_vstrechi');
+        return view('type_visits', compact('tips_vstrechi'));
     }
 
     public function create() {
