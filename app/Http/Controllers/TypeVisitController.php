@@ -24,30 +24,20 @@ class TypeVisitController extends Controller
         $data = request()->validate([
             'tip' => 'string'
         ]);
-        // dd($data);
-        
         Tip_vstrechi::create($data);
         return redirect()->route('type-visits.index');
     }
 
-    public function show(Version $version) {
-       return view('version.show', compact('version'));
+    public function edit(Tip_vstrechi $type) {
+       return view('type_visits.edit', compact('type'));
     }
 
-    public function edit(Version $version) {
-       return view('version.edit', compact('version'));
-    // dd($version);
-    }
-
-    public function update(Version $version){
+    public function update(Tip_vstrechi $type){
         $data = request()->validate([
-            'version' => 'string',
-            'theme' => 'string',
-            'desc' => 'string',
-            'status' => 'string',
+            'tip' => 'string'
         ]);
         $version->update($data);
-        return redirect()->route('versions.index');
+        return redirect()->route('type_visits.index');
     }
 
     public function destroy(Version $version){

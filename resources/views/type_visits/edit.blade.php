@@ -1,4 +1,4 @@
-@extends('layouts.versions')
+@extends('layouts.type_visits')
 
 
 @section('page-title')
@@ -8,10 +8,10 @@
 
 @section('content')
 
-<form action="{{ route('version.update', $version->id)}}" method="post">
+<form action="{{ route('type_visits.update', $version->id)}}" method="post">
   @csrf
   @method('patch')
-  <!-- Версия -->
+  <!-- Вид Встречи Изменить -->
   <div class="form-group col-xs-12 col-lg-8 mt-3">
       <div class="input-group">
         <label class="input-group-text" id="versions-version">Версия<span class="text-danger">*</span>:</label>

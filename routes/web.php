@@ -103,12 +103,14 @@ Route::get('/visits_table',
 
 Route::get('/type-visits',
     [App\Http\Controllers\TypeVisitController::class, 'index'])->name('type-visits.index')->middleware('auth');
-
 Route::get('/type-visits/create', 
     [App\Http\Controllers\TypeVisitController::class, 'create'])->name('type-visits.create')->middleware('auth');
-
 Route::post('/type-visits', 
     [App\Http\Controllers\TypeVisitController::class, 'store'])->name('type-visits.store')->middleware('auth');
+Route::get('/type-visits/{type}/edit', 
+    [App\Http\Controllers\TypeVisitController::class, 'edit'])->name('type-visits.edit')->middleware('auth');
+Route::path('/type-visits/{type}', 
+    [App\Http\Controllers\TypeVisitController::class, 'update'])->name('type-visits.update')->middleware('auth');
 
 
 
