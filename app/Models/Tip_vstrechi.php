@@ -10,4 +10,7 @@ class Tip_vstrechi extends Model
     use HasFactory;
 
     protected $table = 'tips_vstrechi';
+    protected $fillable = [
+        'tip'
+    ];
 }

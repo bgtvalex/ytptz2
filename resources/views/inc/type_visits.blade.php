@@ -5,8 +5,8 @@
     href="{{ route('type-visits.index') }}">Виды</a>
   </li>
   <li class="nav-item">
-    <a class="nav-link {{ Route::currentRouteName()=='version_add' ? 'active' : null }}"
-    href="{{ route('version.create') }}">Добавить</a>
+    <a class="nav-link {{ Route::currentRouteName()=='type-visits.create' ? 'active' : null }}"
+    href="{{ route('type-visits.create') }}">Добавить</a>
   </li>
   <li class="nav-item">
     <a class="nav-link {{ strncmp(Route::currentRouteName(),'version_edit',11)==0 ? 'active' : null }}"

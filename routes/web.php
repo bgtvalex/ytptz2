@@ -104,8 +104,12 @@ Route::get('/visits_table',
 Route::get('/type-visits',
     [App\Http\Controllers\TypeVisitController::class, 'index'])->name('type-visits.index')->middleware('auth');
 
-Route::get('/type-visits/add',
-    [App\Http\Controllers\VstrechaController::class, 'visits_add-type/add'])->name('visits_add-type/add')->middleware('auth');
+Route::get('/type-visits/create', 
+    [App\Http\Controllers\TypeVisitController::class, 'create'])->name('type-visits.create')->middleware('auth');
+
+Route::post('/type-visits', 
+    [App\Http\Controllers\TypeVisitController::class, 'store'])->name('type-visits.store')->middleware('auth');
+
 
 
 
@@ -135,7 +139,6 @@ Route::get('/leaders_edit', function () {
 Route::get('/versions', 
     [App\Http\Controllers\VersionController::class, 'index'])->name('versions.index')->middleware('auth');
 
-// create versions
 Route::get('/versions/create', 
     [App\Http\Controllers\VersionController::class, 'create'])->name('version.create')->middleware('auth');
 

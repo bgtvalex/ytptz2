@@ -12,23 +12,22 @@ class TypeVisitController extends Controller
 {
     public function index() {
         $types = Tip_vstrechi::all();
-        return view('type_visits/index', compact('types'));
+        return view('type_visits.index', compact('types'));
     }
 
     public function create() {
-        $versions = Version::all();
-        return view('version.create', compact('versions'));
+        $types = Tip_vstrechi::all();
+        return view('type_visits.create', compact('types'));
     }
 
     public function store() {
         $data = request()->validate([
-            'version' => 'string',
-            'theme' => 'string',
-            'desc' => 'string',
-            'status' => 'string',
+            'tip' => 'string'
         ]);
-        Version::create($data);
-        return redirect()->route('versions.index');
+        // dd($data);
+        
+        Tip_vstrechi::create($data);
+        return redirect()->route('type-visits.index');
     }
 
     public function show(Version $version) {
