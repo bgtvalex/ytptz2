@@ -27,7 +27,7 @@ class TypeVisitController extends Controller
         Tip_vstrechi::create($data);
         return redirect()->route('type-visits.index');
     }
-
+/* Edit 
     public function edit(Tip_vstrechi $type) {
        return view('type_visits.edit', compact('type'));
     }
@@ -36,9 +36,31 @@ class TypeVisitController extends Controller
         $data = request()->validate([
             'tip' => 'string'
         ]);
-        $version->update($data);
+        $type->update($data);
         return redirect()->route('type_visits.index');
     }
+*/
+
+
+
+    // начало варианты Ильи
+    public function type_visits_edit($id)
+    {
+        $pols = Pol::all()->sortBy('id');
+        $type = new Tip_vstrechi();
+        return view('type_visits_edit', ['data' => $type->find($id), 'pols' => $pols]);
+    }
+    
+    public function submit_type_visits_edit($id, NewTypeVisitsRequest $req)
+    {
+        $type = Tip_vstrechi::find($id);
+        $type->tip = $req->input('tip');
+
+        $type->save();
+
+        return redirect()->route('type_visits_edit', $type->id)->with('success','Название успешно изменено!');
+    }
+    // конец варианты Ильи
 
     public function destroy(Version $version){
         $version->delete();
