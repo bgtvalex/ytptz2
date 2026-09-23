@@ -40,7 +40,7 @@ class VstrechaController extends Controller
         $vstrecha = new Vstrecha();
         $vstrecha->data = $req->input('data');
         $vstrecha->tip_id = $req->input('tip_id');
-        if ($req->input('otvetstvenny')) {
+        if ($req->input('otvetstvenny') != null) {
             $vstrecha->otvetstvenny_id = $req->input('otvetstvenny');
         }
         $vstrecha->theme = $req->input('theme');
@@ -201,4 +201,40 @@ public function visits_table()
     $table->timestamps();
 });*/
 
+    public function vstrecha_edit($id)
+    {
+        $leaders = Person::all()
+        ->where('is_leader', "=", 1)
+        ->sortBy('fio');
+
+        $tips_vstrechi = Tip_vstrechi::all()->sortBy('id');
+
+        $vstrecha = new Vstrecha();
+
+        return view('vstrecha_edit',
+        [
+            'leaders' => $leaders,
+            'tips_vstrechi' => $tips_vstrechi,
+            'vstrecha' => $vstrecha->find($id)
+        ]);
+    }
+
+    public function submit_vstrecha_edit($id, Request $req)
+    {
+        $vstrecha = Vstrecha::find($id);
+        $vstrecha->data = $req->input('data');
+        $vstrecha->tip_id = $req->input('tip_id');
+        if ($req->input('otvetstvenny') != null) {
+            $vstrecha->otvetstvenny_id = $req->input('otvetstvenny');
+        }
+        $vstrecha->theme = $req->input('theme');
+        $vstrecha->place = $req->input('place');
+        $vstrecha->save();
+
+        // TODO: удаление прежних посещений
+
+        // TODO: Добавление новых посещений
+
+        return redirect()->route('vstrecha_edit', $vstrecha->id)->with('success','Встреча успешно обновлена!');
+    }
 };

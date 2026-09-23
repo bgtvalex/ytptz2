@@ -24,7 +24,7 @@
         <td>{{ $vstrecha->theme }} @if($vstrecha->place!="")
           (<i class="bi bi-geo-alt-fill text-danger"></i>{{ $vstrecha->place }}) @endif</td>
         <td>{{ $vstrecha->num }}</td>
-        <td><a href="#"><!-- vstrecha_id --><button type="button" class="btn btn-outline-info"><i class="bi bi-pencil-fill"></i></button></a></td>
+        <td><a href="{{ route('vstrecha_edit', $vstrecha->id) }}"><button type="button" class="btn btn-outline-info"><i class="bi bi-pencil-fill"></i></button></a></td>
     @endforeach
 </table>
 
