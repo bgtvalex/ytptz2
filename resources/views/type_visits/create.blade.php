@@ -15,9 +15,12 @@
   <div class="form-group col-xs-12 col-lg-8 mt-3">
       <div class="input-group">
         <label class="input-group-text" id="type_visits_name">Вид<span class="text-danger">*</span>:</label>
-        <input type="text" 
-          class="form-control" name="tip" id="type_visits" 
-            placeholder="Молодёжка">
+        <input 
+          type="text" 
+          class="form-control" 
+          name="tip" 
+          id="type_visits" 
+          placeholder="Молодёжка">
       </div>
   </div>
 

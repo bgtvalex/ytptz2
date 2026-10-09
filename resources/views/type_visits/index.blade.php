@@ -16,7 +16,11 @@
     @foreach($types as $type)
       <tr class="align-middle">
         <td>{{ ++$i }}</td>
-        <td >{{ $type->tip }}</td>
+        <td>
+          <a class="link-offset-2 link-underline link-underline-opacity-0" href="{{ route('type-visits.show', $type)}} ">
+            {{ $type->tip }}
+          </a>
+        </td>
         
         <td><a href="{{ route('type_visits_edit', $type->id)}} "><button type="button" class="btn btn-outline-info"><i class="bi bi-pencil-fill"></i></button></a> </td>
       </tr>
