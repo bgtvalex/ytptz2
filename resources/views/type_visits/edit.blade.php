@@ -8,9 +8,9 @@
 
 @section('content')
 
-<form action="{{ route('submit_type_visits_edit', $data->id) }}" method="post">
+<form action="{{ route('type-visits.update', $type) }}" method="post">
   @csrf
-  @method('patch')
+  @method('put')
   <!-- Вид Встречи Изменить -->
   <div class="form-group col-xs-12 col-lg-8 mt-3">
       <div class="input-group">

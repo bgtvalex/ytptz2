@@ -109,26 +109,14 @@ Route::post('/type-visits',
     [App\Http\Controllers\TypeVisitController::class, 'store'])->name('type-visits.store')->middleware('auth');
 Route::get('/type-visits/{type}', 
     [App\Http\Controllers\TypeVisitController::class, 'show'])->name('type-visits.show')->middleware('auth');
-
-Route::get('/type-visits/update', 
+Route::get('/type-visits/{type}/edit', 
+    [App\Http\Controllers\TypeVisitController::class, 'edit'])->name('type-visits.edit')->middleware('auth');
+Route::put('/type-visits/{type}/', 
     [App\Http\Controllers\TypeVisitController::class, 'update'])->name('type-visits.update')->middleware('auth');
-Route::get('/type-visits/delete', 
-    [App\Http\Controllers\TypeVisitController::class, 'delete'])->name('type-visits.update')->middleware('auth');
-// Route::get('/type-visits/{type}/edit', 
-    // [App\Http\Controllers\TypeVisitController::class, 'edit'])->name('type-visits.edit')->middleware('auth');
-// Route::path('/type-visits/{type}', 
-    // [App\Http\Controllers\TypeVisitController::class, 'update'])->name('type-visits.update')->middleware('auth');
 
-// Вариант Ильи
-Route::get('/person/edit/',function () {
-    return view('person_edit');
-})->name('person_edit_page')->middleware('auth');
+// Route::get('/type-visits/update', 
+//     [App\Http\Controllers\TypeVisitController::class, 'update'])->name('type-visits.update')->middleware('auth');
 
-Route::get('/type_visits/edit/{id}',
-    [App\Http\Controllers\PersonController::class, 'type_visits_edit'])->name('type_visits_edit')->middleware('auth');
-
-Route::post('/type_visits/edit/{id}',
-    [App\Http\Controllers\PersonController::class, 'submit_type_visits_edit'])->name('submit_type_visits_edit')->middleware('auth');
 
 
 

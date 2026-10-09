@@ -32,19 +32,11 @@ class TypeVisitController extends Controller
         return view('type_visits.show', compact('type'));
     }
 
-    public function update() {
-        $type = Tip_vstrechi::find(1);
-        // $type->update([
-        //     'tip' => 'Молодёжка'
-        // ]);
-        $types = Tip_vstrechi::all();
-        return view('type_visits.index', compact('types'));
+    public function edit(Tip_vstrechi $type) {
+        return view('type_visits.edit', compact('type'));
     }
 
-    public function delete() {
-        // Tip_vstrechi::find(8)->delete();
-
-        $types = Tip_vstrechi::all();
-        return view('type_visits.index', compact('types'));
+    public function update(Tip_vstrechi $type) {
+        dd('1111');
     }
 }
