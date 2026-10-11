@@ -37,6 +37,10 @@ class TypeVisitController extends Controller
     }
 
     public function update(Tip_vstrechi $type) {
-        dd('1111');
+        $data = request()->validate([
+            'tip' => 'string'
+        ]);
+        $type->update($data);
+        return view('type_visits.show', compact('type'));
     }
 }

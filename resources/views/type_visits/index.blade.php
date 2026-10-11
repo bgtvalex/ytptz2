@@ -22,7 +22,7 @@
           </a>
         </td>
         
-        <td><a href="{{ route('type_visits_edit', $type->id)}} "><button type="button" class="btn btn-outline-info"><i class="bi bi-pencil-fill"></i></button></a> </td>
+        <td><a href="{{ route('type-visits.edit', $type->id)}} "><button type="button" class="btn btn-outline-info"><i class="bi bi-pencil-fill"></i></button></a> </td>
       </tr>
     @endforeach
     @endif
