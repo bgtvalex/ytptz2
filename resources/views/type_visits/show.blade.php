@@ -38,7 +38,8 @@
           @csrf
           @method('delete')
           <button type="submit" class="btn btn-outline-danger"><i class="bi bi-trash"></i></button>
-        </form> </td>
+        </form>
+      </td>
       </tr>
     
     @endif
