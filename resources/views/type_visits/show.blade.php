@@ -11,6 +11,7 @@
       <th scope="col" class="text-center">Создан</th>
       <th scope="col" class="text-center">Обновлен</th>
       <th scope="col"></th>
+      <th scope="col"></th>
     </tr> <!-- {{ $i=0 }} -->
     @if (empty($type))
     <div class="alert alert-warning" role="alert">Нет данных.</div>
@@ -33,6 +34,11 @@
         
         
         <td><a href="{{ route('type-visits.edit', $type->id)}} "><button type="button" class="btn btn-outline-info"><i class="bi bi-pencil-fill"></i></button></a> </td>
+        <td><form action="{{ route('type-visits.delete', $type->id)}}" method="post">
+          @csrf
+          @method('delete')
+          <button type="submit" class="btn btn-outline-danger"><i class="bi bi-trash"></i></button>
+        </form> </td>
       </tr>
     
     @endif

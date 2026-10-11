@@ -113,6 +113,8 @@ Route::get('/type-visits/{type}/edit',
     [App\Http\Controllers\TypeVisitController::class, 'edit'])->name('type-visits.edit')->middleware('auth');
 Route::put('/type-visits/{type}/', 
     [App\Http\Controllers\TypeVisitController::class, 'update'])->name('type-visits.update')->middleware('auth');
+Route::delete('/type-visits/{type}/', 
+    [App\Http\Controllers\TypeVisitController::class, 'destroy'])->name('type-visits.delete')->middleware('auth');
 
 // Route::get('/type-visits/update', 
 //     [App\Http\Controllers\TypeVisitController::class, 'update'])->name('type-visits.update')->middleware('auth');

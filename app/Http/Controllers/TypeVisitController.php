@@ -43,4 +43,10 @@ class TypeVisitController extends Controller
         $type->update($data);
         return view('type_visits.show', compact('type'));
     }
+
+    public function destroy(Tip_vstrechi $type) {
+        $type->delete();
+        $types = Tip_vstrechi::all();
+        return view('type_visits.index', compact('types'));
+    }
 }

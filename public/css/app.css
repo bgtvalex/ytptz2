@@ -18,7 +18,7 @@
 }
 
 /* ОБЩИЕ */
-a {
+.type-visits a {
     color: var(--bs-table-striped-color)!important;
     text-decoration: none !important;
 }

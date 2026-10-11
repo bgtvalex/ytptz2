@@ -16,7 +16,7 @@
     @foreach($types as $type)
       <tr class="align-middle">
         <td>{{ ++$i }}</td>
-        <td>
+        <td class="type-visits">
           <a class="link-offset-2 link-underline link-underline-opacity-0" href="{{ route('type-visits.show', $type)}} ">
             {{ $type->tip }}
           </a>
