@@ -25,7 +25,7 @@ class VstrechaController extends Controller
         [
             'leaders' => $all_leaders,
             'tips_vstrechi' => $tips_vstrechi
-        ]);
+        ], compact('all_persons'));
     }
 
 

@@ -11,6 +11,8 @@
 <form action="{{ route('post_vstrecha_add') }}" class="mb-2" method="post">
   @csrf
 
+
+  <!-- Дата встречи -->
   <div class="row g-3 mt-2">
     <div class="form-group col-xs-12 col-sm-6">
       <div class="input-group">
@@ -20,7 +22,7 @@
     </div>
 
 
-
+   <!-- Вид -->
     <div class="form-group col-xs-12 col-sm-6">
       <div class="input-group">
         <span class="input-group-text" id="tip_id-tip">Вид<span class="text-danger">*</span>:</span>
@@ -39,6 +41,7 @@
       </div>
     </div>
 
+    <!-- Ответственный -->
     <div class="form-group col-12">
       <div class="input-group">
       <span class="input-group-text" id="otvetstvenny">Ответственный<span class="text-danger">*</span>:</span>
@@ -53,6 +56,7 @@
       </div>
     </div>
 
+    <!-- Тема -->
     <div class="form-group col-12 col-sm-6">
       <div class="input-group">
         <span class="input-group-text" id="lbl-theme">Тема:</span>
@@ -60,6 +64,7 @@
       </div>
     </div>
 
+    <!-- Место -->
     <div class="form-group col-12 col-sm-6">
       <div class="input-group">
         <span class="input-group-text" id="lbl-place">Место:</span>
@@ -70,6 +75,7 @@
     <input type="hidden" name="visitors" id="visitors">
     <input type="hidden" name="new_persons" id="new_persons">
 
+    <!-- Добавить -->
     <div class="d-grid col-12">
       <button type="submit" class="btn btn-primary">
         Добавить <span id="num_visitors" class="badge text-bg-light fs-6 fw-light align-middle">0</span> человек
@@ -83,8 +89,36 @@
 </form>
 
 <ul class="list-inline" id="person_list">
-
 </ul>
 
+
+<!-- Кнопка-триггер модального окна -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+  Выбрать из списка
+
+</button>
+
+
+<!-- Модальное окно -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">Заголовок модального окна</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+      </div>
+      <div class="modal-body">
+        Список...
+        @foreach($all_persons as $person)
+          <li>{{ $person->fio }}</li>
+        @endforeach
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
+        <button type="button" class="btn btn-primary">Выбрать</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 @endsection
