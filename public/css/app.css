@@ -66,3 +66,15 @@ main {
     width: 5px;
     font-size: 18px;
 }
+
+/* VSTRECHA_ADD */
+.visits-item:hover {
+    background-color: #6c757d;
+    color: #fff;
+    cursor: pointer;
+}
+.visits-item.active {
+    background-color: #0d6efd;
+    color: #fff;
+}
+

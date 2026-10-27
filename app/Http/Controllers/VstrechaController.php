@@ -24,8 +24,9 @@ class VstrechaController extends Controller
         return view('vstrecha_add',
         [
             'leaders' => $all_leaders,
-            'tips_vstrechi' => $tips_vstrechi
-        ], compact('all_persons'));
+            'tips_vstrechi' => $tips_vstrechi,
+            'all_persons' => $all_persons
+        ]);
     }
 
 

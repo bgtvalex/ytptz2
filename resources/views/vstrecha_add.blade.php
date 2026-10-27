@@ -12,8 +12,9 @@
   @csrf
 
 
-  <!-- Дата встречи -->
+  
   <div class="row g-3 mt-2">
+    <!-- Дата встречи -->
     <div class="form-group col-xs-12 col-sm-6">
       <div class="input-group">
         <span class="input-group-text" id="lbl-data">Дата встречи<span class="text-danger">*</span>:</span>
@@ -21,8 +22,7 @@
       </div>
     </div>
 
-
-   <!-- Вид -->
+   <!-- Вид Встречи -->
     <div class="form-group col-xs-12 col-sm-6">
       <div class="input-group">
         <span class="input-group-text" id="tip_id-tip">Вид<span class="text-danger">*</span>:</span>
@@ -95,7 +95,6 @@
 <!-- Кнопка-триггер модального окна -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Выбрать из списка
-
 </button>
 
 
@@ -104,21 +103,54 @@
   <div class="modal-dialog modal-dialog-scrollable">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="exampleModalLabel">Заголовок модального окна</h1>
+        <h1 class="modal-title fs-5" id="exampleModalLabel"></h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
       </div>
       <div class="modal-body">
-        Список...
-        @foreach($all_persons as $person)
-          <li>{{ $person->fio }}</li>
-        @endforeach
+        <ul class="list-group">
+          @foreach($all_persons as $person)
+            <li class="visits-item list-group-item" id="person-{{ $person->id }}">{{ $person->fio }}</li>
+          @endforeach
+        </ul>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-        <button type="button" class="btn btn-primary">Выбрать</button>
+        <button type="button" class="btn btn-primary" id="add-items" data-bs-dismiss="modal">Выбрать</button>
       </div>
     </div>
   </div>
 </div>
+
+<script>
+const num_visitors = document.getElementById('num_visitors')
+let person_list = document.getElementById('person_list')
+const visitors = document.getElementById('visitors')
+const visitsItems = document.querySelectorAll('.visits-item')
+const addItems = document.getElementById('add-items')
+
+for (let item of visitsItems) {
+  item.addEventListener('click', function(){
+    this.classList.toggle('active')
+  })
+}
+
+addItems.addEventListener('click', function(){
+  
+  for (item of visitsItems) {
+    if (item.classList.contains('active')){
+      if(!visitors.hasAttribute('value')) {
+        visitors.setAttribute('value', item.id.slice(7))
+      } else {
+        visitors.value += ',' + item.id.slice(7)
+      }
+      person_list.innerHTML += 
+      `<li class="person_added list-inline-item mt-1" data-sort="${item.textContent}"><div class="btn-group btn-group" role="group"><span class="btn btn-outline-primary">${item.textContent}</span><button type="button" id="person_${item.id.slice(7)}" class="person_del btn btn-primary display-3">X</button></div></li>`
+
+      num_visitors.textContent = (+num_visitors.textContent + 1)
+      console.log(num_visitors.textContent)
+    }
+  }
+})
+</script>
 
 @endsection
