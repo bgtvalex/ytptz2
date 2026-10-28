@@ -73,7 +73,7 @@
           @if ($person_->socials != "")
           <a type="button" href="{{ $person_->socials }}" role="button" class="btn btn-outline-success">
             <i class="bi bi-telegram"></i>
-          </a>
+            </a>
           @endif
         </td>
 

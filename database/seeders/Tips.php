@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class Tips extends Seeder
 {
     static $tips = [
-        'Молодежка',
+        'Молодёжка',
         'Домашка',
         'Вечерняя молитва',
         'Выезд в церкви Карелии',

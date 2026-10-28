@@ -99,6 +99,30 @@ Route::get('/visits_table',
 
 
 
+// VISITS-TYPE ===================
+
+Route::get('/type-visits',
+    [App\Http\Controllers\TypeVisitController::class, 'index'])->name('type-visits.index')->middleware('auth');
+Route::get('/type-visits/create', 
+    [App\Http\Controllers\TypeVisitController::class, 'create'])->name('type-visits.create')->middleware('auth');
+Route::post('/type-visits', 
+    [App\Http\Controllers\TypeVisitController::class, 'store'])->name('type-visits.store')->middleware('auth');
+Route::get('/type-visits/{type}', 
+    [App\Http\Controllers\TypeVisitController::class, 'show'])->name('type-visits.show')->middleware('auth');
+Route::get('/type-visits/{type}/edit', 
+    [App\Http\Controllers\TypeVisitController::class, 'edit'])->name('type-visits.edit')->middleware('auth');
+Route::put('/type-visits/{type}/', 
+    [App\Http\Controllers\TypeVisitController::class, 'update'])->name('type-visits.update')->middleware('auth');
+Route::delete('/type-visits/{type}/', 
+    [App\Http\Controllers\TypeVisitController::class, 'destroy'])->name('type-visits.delete')->middleware('auth');
+
+// Route::get('/type-visits/update', 
+//     [App\Http\Controllers\TypeVisitController::class, 'update'])->name('type-visits.update')->middleware('auth');
+
+
+
+
+
 // LEADERS ============================================
 
 Route::get('/leaders', function () {
@@ -125,7 +149,6 @@ Route::get('/leaders_edit', function () {
 Route::get('/versions', 
     [App\Http\Controllers\VersionController::class, 'index'])->name('versions.index')->middleware('auth');
 
-// create versions
 Route::get('/versions/create', 
     [App\Http\Controllers\VersionController::class, 'create'])->name('version.create')->middleware('auth');
 

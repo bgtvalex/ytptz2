@@ -9,5 +9,9 @@ class Tip_vstrechi extends Model
 {
     use HasFactory;
 
-    protected $table = 'tips_vstrechi';
+    protected $table = 'tips_vstrechi'; // привязывает таблицу БД к этой Модели
+    protected $guarded = false; // позволяет добавлять в БД новые данные
+    // protected $fillable = [
+    //     'tip'
+    // ];
 }
