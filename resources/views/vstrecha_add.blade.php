@@ -109,13 +109,13 @@
       <div class="modal-body">
         <ul class="list-group">
           @foreach($all_persons as $person)
-            <li class="visits-item list-group-item" id="person-{{ $person->id }}">{{ $person->fio }}</li>
+            <li class="visits-item list-group-item" id="person_{{ $person->id }}">{{ $person->fio }}</li>
           @endforeach
         </ul>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Отмена</button>
-        <button type="button" class="btn btn-primary" id="add-items" data-bs-dismiss="modal">Выбрать</button>
+        <button type="button" class="btn btn-primary" id="btn-add-items" data-bs-dismiss="modal">Выбрать</button>
       </div>
     </div>
   </div>
@@ -125,18 +125,17 @@
 const num_visitors = document.getElementById('num_visitors')
 let person_list = document.getElementById('person_list')
 const visitors = document.getElementById('visitors')
-const visitsItems = document.querySelectorAll('.visits-item')
-const addItems = document.getElementById('add-items')
+const $visitsItems = document.querySelectorAll('.visits-item')
+const $btnAddItems = document.getElementById('btn-add-items')
 
-for (let item of visitsItems) {
+for (let item of $visitsItems) {
   item.addEventListener('click', function(){
     this.classList.toggle('active')
   })
 }
 
-addItems.addEventListener('click', function(){
-  
-  for (item of visitsItems) {
+$btnAddItems.addEventListener('click', function(){
+  for (item of $visitsItems) {
     if (item.classList.contains('active')){
       if(!visitors.hasAttribute('value')) {
         visitors.setAttribute('value', item.id.slice(7))
