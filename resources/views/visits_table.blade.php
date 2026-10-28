@@ -14,7 +14,11 @@
             @foreach ($columns as $meeting)
                 <th class="visits-table__data">
                     <a href="#" data-bs-toggle="tooltip" data-bs-html="true"
-                       data-bs-title="{{ $meeting['vstrechiTheme'] }}<br>отв.{{ $meeting['otv_name'] }}">
+                       data-bs-title="@if ($meeting['vstrechiTheme']) {{ $meeting['vstrechiTheme'] }} @endif
+                                            @if ($meeting['vstrechiTheme'] && $meeting['otv_name']) <br> @endif
+                                        @if ($meeting['otv_name']) {{ $meeting['otv_name'] }} @endif
+                                            @if ( ($meeting['otv_name'] && $meeting['vstrechi_place']) || ($meeting['vstrechiTheme'] && $meeting['vstrechi_place'])) <br> @endif
+                                        @if ($meeting['vstrechi_place']) <i class='bi bi-geo-alt-fill text-danger'></i>{{ $meeting['vstrechi_place'] }} @endif">
                         {{ $meeting['vstrechi_data'] }}
                     </a>
                 </th>

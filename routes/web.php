@@ -96,6 +96,11 @@ Route::get('/vstrecha_all',
 Route::get('/visits_table',
     [App\Http\Controllers\VstrechaController::class, 'visits_table'])->name('visits_table')->middleware('auth');
 
+Route::get('/vstrecha_edit/{id}',
+    [App\Http\Controllers\VstrechaController::class, 'vstrecha_edit'])->name('vstrecha_edit')->middleware('auth');
+Route::post('/vstrecha_edit/{id}',
+    [App\Http\Controllers\VstrechaController::class, 'submit_vstrecha_edit'])->name('submit_vstrecha_edit')->middleware('auth');
+
 
 
 

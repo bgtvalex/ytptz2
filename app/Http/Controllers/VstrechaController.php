@@ -40,7 +40,7 @@ class VstrechaController extends Controller
         $vstrecha = new Vstrecha();
         $vstrecha->data = $req->input('data');
         $vstrecha->tip_id = $req->input('tip_id');
-        if ($req->input('otvetstvenny')) {
+        if ($req->input('otvetstvenny') != null) {
             $vstrecha->otvetstvenny_id = $req->input('otvetstvenny');
         }
         $vstrecha->theme = $req->input('theme');
@@ -98,12 +98,12 @@ class VstrechaController extends Controller
         $all_vstrechas = DB::table('vstrechi')
             ->join('tips_vstrechi', 'vstrechi.tip_id', '=', 'tips_vstrechi.id')
             ->join('persons', 'vstrechi.otvetstvenny_id', '=', 'persons.id')
-            ->select('persons.fio',
-                    'vstrechi.id',
-                    'tips_vstrechi.tip',
-                    'vstrechi.data',
-                    'vstrechi.theme',
-                    'vstrechi.place')
+            ->select(DB::raw('persons.fio,
+                    vstrechi.id,
+                    tips_vstrechi.tip,
+                    DATE_FORMAT(vstrechi.data, "%d.%m.%Y") as data,
+                    vstrechi.theme,
+                    vstrechi.place'))
             ->orderBy('data')
             ->get();
 
@@ -132,6 +132,7 @@ public function visits_table()
             persons.fio AS person_name,
             persons.guest AS person_is_guest,
             vstrechi.id AS vstrechi_id,
+            vstrechi.place AS vstrechi_place,
             vstrechi.theme AS vstrechi_theme,
             DATE_FORMAT(vstrechi.data, '%d.%m.%Y') AS vstrechi_data,
             visits.id IS NOT NULL AS attended,
@@ -156,6 +157,7 @@ public function visits_table()
                 'vstrechi_id'   => $m->vstrechi_id,
                 'vstrechiTheme' => $m->vstrechi_theme,
                 'vstrechi_data' => $m->vstrechi_data,
+                'vstrechi_place' => $m->vstrechi_place,
                 'otv_name'      => $m->otv_name,
             ];
         })
@@ -201,4 +203,40 @@ public function visits_table()
     $table->timestamps();
 });*/
 
+    public function vstrecha_edit($id)
+    {
+        $leaders = Person::all()
+        ->where('is_leader', "=", 1)
+        ->sortBy('fio');
+
+        $tips_vstrechi = Tip_vstrechi::all()->sortBy('id');
+
+        $vstrecha = new Vstrecha();
+
+        return view('vstrecha_edit',
+        [
+            'leaders' => $leaders,
+            'tips_vstrechi' => $tips_vstrechi,
+            'vstrecha' => $vstrecha->find($id)
+        ]);
+    }
+
+    public function submit_vstrecha_edit($id, Request $req)
+    {
+        $vstrecha = Vstrecha::find($id);
+        $vstrecha->data = $req->input('data');
+        $vstrecha->tip_id = $req->input('tip_id');
+        if ($req->input('otvetstvenny') != null) {
+            $vstrecha->otvetstvenny_id = $req->input('otvetstvenny');
+        }
+        $vstrecha->theme = $req->input('theme');
+        $vstrecha->place = $req->input('place');
+        $vstrecha->save();
+
+        // TODO: удаление прежних посещений
+
+        // TODO: Добавление новых посещений
+
+        return redirect()->route('vstrecha_edit', $vstrecha->id)->with('success','Встреча успешно обновлена!');
+    }
 };
