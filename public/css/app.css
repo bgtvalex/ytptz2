@@ -17,6 +17,12 @@
     z-index: 1020;
 }
 
+/* ОБЩИЕ */
+.type-visits a {
+    color: var(--bs-table-striped-color)!important;
+    text-decoration: none !important;
+}
+
 main {
     padding-top: 15px;
     /* height: 80vh; */
