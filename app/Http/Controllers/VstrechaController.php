@@ -209,6 +209,14 @@ public function visits_table()
         ->where('is_leader', "=", 1)
         ->sortBy('fio');
 
+        // Запрос посетителей
+        $visitors = DB::select("SELECT
+        persons.id, persons.fio, persons.guest,
+            visits.id, visits.vstrecha_id, visits.person_id
+            FROM persons,visits
+            WHERE visits.person_id=persons.id and visits.vstrecha_id=$id
+            ORDER BY persons.fio;");
+
         $tips_vstrechi = Tip_vstrechi::all()->sortBy('id');
 
         $vstrecha = new Vstrecha();
@@ -217,7 +225,8 @@ public function visits_table()
         [
             'leaders' => $leaders,
             'tips_vstrechi' => $tips_vstrechi,
-            'vstrecha' => $vstrecha->find($id)
+            'vstrecha' => $vstrecha->find($id),
+            'visitors' => $visitors
         ]);
     }
 
