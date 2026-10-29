@@ -4,14 +4,14 @@
 @section('content')
 
 <!-- mTODO: https://codepen.io/massimo-cassandro/pen/NqRmMe -->
-<table class="table table-striped table-hover mt-4 mb-6 table-responsive">
+<table class="table table-striped table-hover mt-4 mb-6">
   <tbody class="table-striped">
     <tr>
       <th scope="col">#</th>
       <th scope="col">ФИО</th>
-      <th scope="col">Контакты</th>
-      <th scope="col">Место рождения</th>
-      <th scope="col">Дата рождения</th>
+      <th scope="col" class="d-none d-md-table-cell">Контакты</th>
+      <th scope="col" class="d-none d-md-table-cell">Место рождения</th>
+      <th scope="col" class="d-none d-md-table-cell">Дата рождения</th>
       <th scope="col"> </th>
     </tr> <!-- {{ $i=0 }} -->
     @if (empty($data))
@@ -28,7 +28,7 @@
         @endif
       >
         <td>{{ ++$i }}</td>
-        <td >
+        <td>
         @if ($person_->pol_id == 2)
         <svg width="16" height="16" fill="#33CCCC" viewBox="-160 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M96 0c35.346 0 64 28.654 64 64s-28.654 64-64 64-64-28.654-64-64S60.654 0 96 0m48 144h-11.36c-22.711 10.443-49.59 10.894-73.28 0H48c-26.51 0-48 21.49-48 48v136c0 13.255 10.745 24 24 24h16v136c0 13.255 10.745 24 24 24h64c13.255 0 24-10.745 24-24V352h16c13.255 0 24-10.745 24-24V192c0-26.51-21.49-48-48-48z"/></svg>
         @elseif ($person_->pol_id == 3)
@@ -66,7 +66,7 @@
         @if ($person_->comments != "")
         <button type="button" class="btn p-0 text-secondary" data-bs-toggle="tooltip" data-bs-placement="right" data-bs-title="{{ $person_->comments }}"><i class="bi bi-chat-left-dots"></i></button>@endif
         </td>
-        <td>@if ($person_->telefon != "")
+        <td class="d-none d-md-table-cell">@if ($person_->telefon != "")
           <a type="button" href="tel:{{ $person_->telefon }}" role="button" class="btn btn-outline-success">
             <i class="bi bi-telephone-outbound-fill"></i> 
           </a>@endif
@@ -77,8 +77,8 @@
           @endif
         </td>
 
-        <td >{{ $person_->mesto_rozhd }}</td>
-        <td >
+        <td class="d-none d-md-table-cell" >{{ $person_->mesto_rozhd }}</td>
+        <td class="d-none d-md-table-cell">
           {{ $person_->data_rozhd }}
           @if ($person_->data_rozhd != "")
           ({{ floor((time() - strtotime($person_->data_rozhd))/31536000) }})
