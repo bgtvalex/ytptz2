@@ -1,9 +1,9 @@
-@media screen and (max-width: 992px) {
+/*@media screen and (max-width: 992px) {
     .table {
         min-width: 900px !important;
         overflow-y: auto;
     }
-}
+}*/
 .navbar {
     /* position: fixed !important; */
     width: 100%;
