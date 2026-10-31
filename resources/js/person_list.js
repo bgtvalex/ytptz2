@@ -22,7 +22,6 @@ for (let item of $visitsItems) {
 }
 
 $btnAddItems.addEventListener("click", function () {
-
     for (let item of $visitsItems) {
         if (item.classList.contains("active")) {
           // проверка есть ли выбранные персоны
@@ -34,7 +33,7 @@ $btnAddItems.addEventListener("click", function () {
                 visitors.value += "," + id;
             }
             person_selected_list.push(+id);
-            person_list.innerHTML += `<li class="person_added list-inline-item mt-1" data-sort="${item.textContent}"><div class="btn-group btn-group" role="group"><span class="btn btn-outline-primary">${item.textContent}</span><button type="button" id="person_${item.id.slice(7)}" class="person_del btn btn-primary display-3">X</button></div></li>`;
+            person_list.innerHTML += `<li class="person_added list-inline-item mt-1 g-col-6" data-sort="${item.textContent}"><div class="btn-group btn-group" role="group"><span class="btn btn-outline-primary">${item.textContent}</span><button type="button" id="person_${item.id.slice(7)}" class="person_del btn btn-primary display-3">X</button></div></li>`;
 
             num_visitors.textContent = person_selected_list.length;
           }

@@ -88,12 +88,12 @@
 
 </form>
 
-<ul class="list-inline" id="person_list">
+<ul class="grid text-left" id="person_list"  style="--bs-gap: .25rem 1rem;">
 </ul>
 
 
 <!-- Кнопка-триггер модального окна -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+<button type="button" class="btn btn-primary btn_choose_from_list" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Выбрать из списка
 </button>
 

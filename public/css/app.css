@@ -78,3 +78,15 @@ main {
     color: #fff;
 }
 
+#person_list {
+    padding-bottom: 30px;
+    column-count: 5;
+    column-gap: 20px;
+    /* column-rule: 1px solid #ccc; */
+    border-bottom: 1px solid #ccc;
+}
+
+.btn_choose_from_list {
+    margin-bottom: 100px;
+}
+

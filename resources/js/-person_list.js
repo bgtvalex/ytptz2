@@ -2,6 +2,8 @@ var person_selected_list = [];
 
 var new_person_list = [];
 
+
+
 // Добавление персоны в список
 $(document).on('click', '.person_selected', function () {
 
