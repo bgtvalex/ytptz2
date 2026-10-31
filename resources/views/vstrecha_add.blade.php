@@ -121,35 +121,6 @@
   </div>
 </div>
 
-<script>
-const num_visitors = document.getElementById('num_visitors')
-let person_list = document.getElementById('person_list')
-const visitors = document.getElementById('visitors')
-const $visitsItems = document.querySelectorAll('.visits-item')
-const $btnAddItems = document.getElementById('btn-add-items')
 
-for (let item of $visitsItems) {
-  item.addEventListener('click', function(){
-    this.classList.toggle('active')
-  })
-}
-
-$btnAddItems.addEventListener('click', function(){
-  for (item of $visitsItems) {
-    if (item.classList.contains('active')){
-      if(!visitors.hasAttribute('value')) {
-        visitors.setAttribute('value', item.id.slice(7))
-      } else {
-        visitors.value += ',' + item.id.slice(7)
-      }
-      person_list.innerHTML += 
-      `<li class="person_added list-inline-item mt-1" data-sort="${item.textContent}"><div class="btn-group btn-group" role="group"><span class="btn btn-outline-primary">${item.textContent}</span><button type="button" id="person_${item.id.slice(7)}" class="person_del btn btn-primary display-3">X</button></div></li>`
-
-      num_visitors.textContent = (+num_visitors.textContent + 1)
-      console.log(num_visitors.textContent)
-    }
-  }
-})
-</script>
 
 @endsection
