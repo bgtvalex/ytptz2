@@ -101,10 +101,11 @@ class VstrechaController extends Controller
             ->select(DB::raw('persons.fio,
                     vstrechi.id,
                     tips_vstrechi.tip,
+                    vstrechi.data as raw_date,
                     DATE_FORMAT(vstrechi.data, "%d.%m.%Y") as data,
                     vstrechi.theme,
                     vstrechi.place'))
-            ->orderBy('data')
+            ->orderBy('raw_date', 'asc')
             ->get();
 
         foreach ($all_vstrechas as $vstrecha) {
@@ -134,6 +135,7 @@ public function visits_table()
             vstrechi.id AS vstrechi_id,
             vstrechi.place AS vstrechi_place,
             vstrechi.theme AS vstrechi_theme,
+            vstrechi.data AS raw_date,
             DATE_FORMAT(vstrechi.data, '%d.%m.%Y') AS vstrechi_data,
             visits.id IS NOT NULL AS attended,
             vstrechi.otvetstvenny_id AS otv_id,
@@ -145,13 +147,13 @@ public function visits_table()
             AND visits.vstrecha_id = vstrechi.id
         LEFT JOIN persons AS resp
             ON resp.id = vstrechi.otvetstvenny_id
-        ORDER BY persons.fio, vstrechi.data, vstrechi.theme
+        ORDER BY persons.fio, raw_date ASC, vstrechi.theme
     ");
 
     // 2. Фиксируем порядок столбцов (уникальные встречи, отсортированные по дате)
     $meetings = collect($rows)
         ->unique('vstrechi_id')
-        ->sortBy('vstrechi_data')
+        ->sortBy('raw_date')
         ->map(function ($m) {
             return [
                 'vstrechi_id'   => $m->vstrechi_id,
@@ -209,6 +211,14 @@ public function visits_table()
         ->where('is_leader', "=", 1)
         ->sortBy('fio');
 
+        // Запрос посетителей
+        $visitors = DB::select("SELECT
+        persons.id, persons.fio, persons.guest,
+            visits.id, visits.vstrecha_id, visits.person_id
+            FROM persons,visits
+            WHERE visits.person_id=persons.id and visits.vstrecha_id=$id
+            ORDER BY persons.fio;");
+
         $tips_vstrechi = Tip_vstrechi::all()->sortBy('id');
 
         $vstrecha = new Vstrecha();
@@ -217,7 +227,8 @@ public function visits_table()
         [
             'leaders' => $leaders,
             'tips_vstrechi' => $tips_vstrechi,
-            'vstrecha' => $vstrecha->find($id)
+            'vstrecha' => $vstrecha->find($id),
+            'visitors' => $visitors
         ]);
     }
 
