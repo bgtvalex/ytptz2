@@ -10,15 +10,17 @@ class PersonSearch extends Component
 {
     public $searchTerm;
     public $persons;
+    public $excludedIds = [];
 
     
     public function render()
     {
-        $searchTerm = '%' . $this->searchTerm . '%';
-        if ($this->searchTerm == "" or Str::length($this->searchTerm) < 2)
-            $this->persons = [];
-        else
-            $this->persons = Person::where('fio', 'like', $searchTerm)->get();
-        return view('livewire.person-search');
+        $persons = Person::query()
+            ->when($this->searchTerm, fn($q) => $q->where('fio', 'like', "%{$this->searchTerm}%"))
+            ->when(!empty($this->excludedIds), fn($q) => $q->whereNotIn('id', $this->excludedIds))
+            ->limit(10)
+            ->get();
+
+        return view('livewire.visitor-add', compact('persons'));
     }
 }

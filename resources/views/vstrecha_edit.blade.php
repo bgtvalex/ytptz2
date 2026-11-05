@@ -1,7 +1,7 @@
 @extends('layouts.vstrecha')
 
 @section('page-title')
-Добавить встречу
+Изменить встречу
 @endsection
 
 @section('content')
@@ -73,11 +73,13 @@
 
     <div class="d-grid col-12">
       <button type="submit" class="btn btn-primary">
-        Сохранить <span id="num_visitors" class="badge text-bg-light fs-6 fw-light align-middle">0</span> человек
+        Записать <span id="num_visitors" class="badge text-bg-light fs-6 fw-light align-middle">{{count($visitors)}}</span> человек
       </button>
     </div>
 
   </div>
+
+@livewire('visitor-add')
 
 </form>
 

@@ -10,17 +10,23 @@ use Illuminate\Support\Str;
 
 class VisitorAdd extends Component
 {
-    public $searchTerm;
-    public $persons;
+    public $searchTerm = '';
+    public $excludedIds = [];
 
 
     public function render()
     {
-        $searchTerm = '%' . $this->searchTerm . '%';
-        if ($this->searchTerm == "" or Str::length($this->searchTerm) < 2)
-            $this->persons = [];
-        else
-            $this->persons = Person::where('fio', 'like', $searchTerm)->get();
-        return view('livewire.visitor-add');
+        
+        $persons = [];
+
+        if (Str::length($this->searchTerm)> 1)
+            //$this->persons = Person::where('fio', 'like', $searchTerm)->get()//
+            $persons = Person::query()
+                ->when($this->searchTerm, fn($q) => $q->where('fio', 'like', "%{$this->searchTerm}%"))
+                ->when(!empty($this->excludedIds), fn($q) => $q->whereNotIn('id', $this->excludedIds))
+                ->limit(20)
+                ->get();
+
+        return view('livewire.visitor-add', ['persons' => $persons]);
     }
 }

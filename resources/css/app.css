@@ -9,3 +9,14 @@
 			background-color: black;
 		}
 }
+
+@keyframes flash-red {
+    0%   { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.9); }
+    50%  { box-shadow: 0 0 0 6px rgba(220, 53, 69, 0.9); }
+    100% { box-shadow: 0 0 0 0 rgba(220, 53, 69, 0); }
+}
+
+.flash {
+    animation: flash-red 0.6s ease-in-out 3; /* 3 вспышки по 0.6с ≈ 1.8с */
+    border-radius: .25rem;
+}
