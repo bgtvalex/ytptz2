@@ -1,9 +1,5 @@
-@media screen and (max-width: 992px) {
-    .table {
-        min-width: 900px !important;
-        overflow-y: auto;
-    }
-}
+
+
 .navbar {
     /* position: fixed !important; */
     width: 100%;
@@ -78,7 +74,7 @@ main {
     color: #fff;
 }
 
-#person_list {
+.person_list {
     padding-bottom: 30px;
     column-count: 5;
     column-gap: 20px;
@@ -90,3 +86,37 @@ main {
     margin-bottom: 100px;
 }
 
+
+
+@media screen and (max-width: 992px) {
+    .table {
+        min-width: 900px !important;
+        overflow-y: auto;
+    }
+
+    .person_list {
+        column-count: 4;
+        column-gap: 20px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .person_list {
+        column-count: 3;
+        column-gap: 20px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .person_list {
+        column-count: 2;
+        column-gap: 20px;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .person_list {
+        column-count: 1;
+        column-gap: 20px;
+    }
+}

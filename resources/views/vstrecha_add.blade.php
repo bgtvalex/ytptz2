@@ -88,7 +88,7 @@
 
 </form>
 
-<ul class="grid text-left" id="person_list"  style="--bs-gap: .25rem 1rem;">
+<ul class="grid text-left person_list" id="person_list"  style="--bs-gap: .25rem 1rem;">
 </ul>
 
 
