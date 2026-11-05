@@ -24,24 +24,73 @@ for (let item of $visitsItems) {
 $btnAddItems.addEventListener("click", function () {
     for (let item of $visitsItems) {
         if (item.classList.contains("active")) {
-          // проверка есть ли выбранные персоны
-          let id = +item.id.slice(7);
-          if (!person_selected_list.includes(id)) {
-            if (!visitors.hasAttribute("value")) {
-                visitors.setAttribute("value", id);
-            } else {
-                visitors.value += "," + id;
-            }
-            person_selected_list.push(+id);
-            person_list.innerHTML += `<li class="person_added list-inline-item mt-1 g-col-6" data-sort="${item.textContent}"><div class="btn-group btn-group" role="group"><span class="btn btn-outline-primary">${item.textContent}</span><button type="button" id="person_${item.id.slice(7)}" class="person_del btn btn-primary display-3">X</button></div></li>`;
-
-            num_visitors.textContent = person_selected_list.length;
-          }
+            personAdd(item);
         }
+    }
+
+    // удаление элементов
+    let elementDeletes = document.querySelectorAll(".person_del");
+    for (let el of elementDeletes) {
+        el.addEventListener("click", function () {
+            personDelete(el);
+        });
     }
 });
 
 /* === METHODS === */
+
+// Добавление персон
+function personAdd(item) {
+    let id = +item.id.slice(7);
+    // проверка есть ли выбранные персоны
+    if (!person_selected_list.includes(id)) {
+        // добавление аттрибута value элементу VISITORS
+        if (!visitors.hasAttribute("value")) {
+            visitors.setAttribute("value", id);
+        } else {
+            visitors.value += "," + id;
+        }
+        person_selected_list.push(+id);
+
+        // добавление самого элемента
+        person_list.innerHTML += `<li class="person_added list-inline-item mt-1 g-col-6" data-sort="${item.textContent}"><div class="btn-group btn-group" role="group"><span class="btn btn-outline-primary">${item.textContent}</span><button type="button" id="person_${id}" class="person_del btn btn-primary display-3">X</button></div></li>`;
+
+        num_visitors.textContent = person_selected_list.length;
+    }
+}
+
+// Удаление персон
+function personDelete(el) {
+    let id = +el.id.slice(7);
+    changeCounters(id);
+
+    // удаляем сам элемент
+    el.closest(".person_added").remove();
+    console.log("deleted");
+}
+
+function changeCounters(id) {
+    // меняем массив person_selected_list
+    for (let i = person_selected_list.length - 1; i >= 0; i--) {
+        if (person_selected_list[i] === id) {
+            person_selected_list.splice(i, 1);
+            console.log(person_selected_list);
+        }
+    }
+
+    // меняем счётчик num_visitors
+    num_visitors.textContent = person_selected_list.length;
+
+    // меняем visitors
+    visitors.removeAttribute("value");
+    for (let el of person_selected_list) {
+        if (!visitors.hasAttribute("value")) {
+            visitors.setAttribute("value", el);
+        } else {
+            visitors.value += "," + el;
+        }
+    }
+}
 
 /* ===  HTML-ELEMENTS === */
 
@@ -54,7 +103,7 @@ $btnAddItems.addEventListener("click", function () {
 	</div>
 */
 
-/* Добавлющийся элемент в список выбранных
+/* Добавляющийся элемент в список выбранных
 	<li class="person_added list-inline-item mt-1" data-sort="Амелина Олеся">
 		<div class="btn-group btn-group" role="group">
 			<span class="btn btn-outline-primary">Амелина Олеся</span>
