@@ -46,51 +46,20 @@ $btnAddItems.addEventListener("click", function () {
                 person_selected_list.push(+id);
 
                 // добавление элемента Персоны
-                person_list.innerHTML += `<li class="person_added list-inline-item mt-1 g-col-6" data-sort="${item.textContent}"><div class="btn-group btn-group" role="group"><span class="btn btn-outline-primary">${item.textContent}</span><button type="button" id="person_${id}" class="person_del btn btn-primary display-3">X</button></div></li>`;
+                person_list.innerHTML += 
+                `<li class="person_added list-inline-item mt-1 g-col-6" data-sort="${item.textContent}">
+                    <div class="btn-group btn-group" role="group">
+                        <span class="btn btn-outline-primary">${item.textContent}</span>
+                    <button type="button" id="person_${id}" class="person_del btn btn-primary display-3">X</button>
+                    </div>
+                </li>`;
 
                 num_visitors.textContent = person_selected_list.length + new_person_list.length;
             }
         }
     }
     deleteItems()
-    /*
-    // удаление Персон из .person_list
-    let elementDeletes = document.querySelectorAll(".person_del");
-    for (let el of elementDeletes) {
-        el.addEventListener("click", function () {
-        console.log(el, 'delete')
-            let id = +el.id.slice(7);
-            changeCounters(id);
-
-            // удаляем сам элемент
-            el.closest(".person_added").remove();
-        });
-    }
-    */
 });
-
-// Изменение счётчиков
-function changeCounters(id) {
-    // меняем массив person_selected_list
-    for (let i = person_selected_list.length - 1; i >= 0; i--) {
-        if (person_selected_list[i] === id) {
-            person_selected_list.splice(i, 1);
-        }
-    }
-
-    // меняем счётчик num_visitors
-    num_visitors.textContent = person_selected_list.length + new_person_list.length;
-
-    // меняем visitors
-    visitors.removeAttribute("value");
-    for (let el of person_selected_list) {
-        if (!visitors.hasAttribute("value")) {
-            visitors.setAttribute("value", el);
-        } else {
-            visitors.value += "," + el;
-        }
-    }
-}
 
 /* = Добавление Новой Персоны */
 $btnNewPerson.addEventListener('click', function(){
@@ -99,7 +68,6 @@ $btnNewPerson.addEventListener('click', function(){
     $personSearchInput.value = ''
 
     // $newPersons
-    
     // проверка есть ли выбранные персоны
     if (!new_person_list.includes(id)) {
         // добавление аттрибута value элементу VISITORS
@@ -117,40 +85,78 @@ $btnNewPerson.addEventListener('click', function(){
 
     // добавление Новой Персоны в .person_list
     person_list.innerHTML += `
-        <div class="btn-group btn-group person" role="group">
-            <span class="btn btn-outline-success">${id}</span>
-            <button type="button" id="${'newperson_' + id}" class="person_del btn btn-success display-3">X</button>
-        </div>`
+        <li class="person_added list-inline-item mt-1" data-sort="${id}">
+            <div class="btn-group btn-group" role="group">
+                <span class="btn btn-outline-success">${id}</span>
+                <button type="button" id="${'newperson_' + id}" class="person_del btn btn-success display-3">X</button>
+            </div>
+        </li>`
         deleteItems()
-        /*
-        // удаление Новых Персон из .person_list
-        let elements = document.querySelectorAll('.new_person_del')
-        console.log(elements)
-        for(let elem of elements) {
-            elem.addEventListener('click', function(){
-                console.log(elem, 'delete')
-                for (let i = new_person_list.length - 1; i >= 0; i--) {
-                    if (new_person_list[i] === elem.id) {
-                        new_person_list.splice(i, 1);
-                        console.log(new_person_list);
-                    }
-                }
-                elem.closest('.person').remove()
-                num_visitors.textContent = person_selected_list.length + new_person_list.length;
-            })
-        }
-        */
-
 })
 
+// Удаление Персон из .person_list
 function deleteItems () {
-    let items = document.querySelectorAll('.person_del')
-    for (let item of items) {
-        item.addEventListener('click', function(){
-            item.closest('.person').remove()
+    let elements = document.querySelectorAll('.person_del')
+    for (let el of elements) {
+        el.addEventListener('click', function(){
+            changeCounters(el)
+            let element = el.closest('.person_added')
+            element.remove()
         })
     }
 }
+
+
+// Обновление счётчиков
+function changeCounters(el) {
+    console.log(el)
+
+    // проверка на Персону и Новую Персону
+    const elms = el.closest('.btn-group').children
+    for (let elTarget of elms) {
+        if (elTarget.classList.contains('btn-outline-primary')) {
+            let id = +el.id.slice(7);
+            // удаление из массива person_selected_list
+            for (let i = person_selected_list.length - 1; i >= 0; i--) {
+                if (person_selected_list[i] === id) {
+                    person_selected_list.splice(i, 1);
+                }
+            }
+            // меняем visitors
+            visitors.removeAttribute("value");
+            for (let el of person_selected_list) {
+                if (!visitors.hasAttribute("value")) {
+                    visitors.setAttribute("value", el);
+                } else {
+                    visitors.value += "," + el;
+                }
+            }
+            // меняем счётчик num_visitors
+            num_visitors.textContent = person_selected_list.length + new_person_list.length
+        } 
+        else {
+            // удаление из массива new_person_list
+            for (let i = new_person_list.length - 1; i >= 0; i--) {
+                if (new_person_list[i] === el.id) {
+                    new_person_list.splice(i, 1);
+                    console.log(new_person_list);
+                }
+            }
+            // удаление из скрытых new_persons
+            $newPersons.removeAttribute("value");
+            for (let el of new_person_list) {
+                if (!$newPersons.hasAttribute("value")) {
+                    $newPersons.setAttribute("value", el);
+                } else {
+                    $newPersons.value += "," + el;
+                }
+            }
+            // меняем счётчик num_visitors
+            num_visitors.textContent = person_selected_list.length + new_person_list.length
+        }
+    }
+}
+
 
 
 /* ===  HTML-ELEMENTS === */
@@ -163,8 +169,7 @@ function deleteItems () {
 		</span>
 	</div>
 */
-
-/* Добавляющийся элемент в список выбранных
+/* Добавляющийся элемент Персоны в .person_list
 	<li class="person_added list-inline-item mt-1" data-sort="Амелина Олеся">
 		<div class="btn-group btn-group" role="group">
 			<span class="btn btn-outline-primary">Амелина Олеся</span>
@@ -172,17 +177,21 @@ function deleteItems () {
 		</div>
 	</li>
 */
-/* Добавлена Новая Персона
-  <div class="btn-group btn-group" role="group">
-    <span class="btn btn-outline-success">Богатенков Александр</span>
-    <button type="button" id="newperson_Богатенков Александр" class="person_del btn btn-success display-3">X</button>
-  </div>
+/* Добавляющийся элемент Новой Персоны в .person_list
+    <li class="person_added list-inline-item mt-1" data-sort="Богатенков Александр">
+        <div class="btn-group btn-group" role="group">
+            <span class="btn btn-outline-success">Богатенков Александр</span>
+            <button type="button" id="newperson_Богатенков Александр" class="person_del btn btn-success display-3">X</button>
+        </div>
+    </li>
 */
 
 
 
 
-// удалить после успешной замены кода
+/* =========== удалить после успешной замены кода ================ */
+
+
 /* Скрипт из vstrecha_add.blade.php
 <script>
 const num_visitors = document.getElementById('num_visitors')
