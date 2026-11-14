@@ -13,7 +13,7 @@ class VisitorModal extends Component
     public function render()
     {
         return view('livewire.visitor-modal', [
-            'all_persons' => Person::all()
+            'all_persons' => Person::all()->sortBy('fio')
         ]);
     }
 }
